@@ -5,6 +5,7 @@
     height: 300px;
 }
 #close {
+    cursor: pointer;
     float:right;
     margin: 2px;
 }
@@ -15,7 +16,7 @@
 }
 .senderMessage, .recieverMessage {
     width: 300px;
-    height: 30px;
+    height: 20px;
 }
 
 .navbar {
@@ -27,6 +28,10 @@
     display: none;
 }
 
-#sendMessage {
-    margin-top: 180px;
+.messages {
+    width: 300px;
+    height: 230px;
+    margin-bottom: 2%; 
+    overflow-y: auto;
+    overflow-x: hidden;
 }

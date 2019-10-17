@@ -11,17 +11,14 @@ template.innerHTML = `
 <img id="close" src="../image/error.png" alt="close window" />
 <p id="timestamp"></p>
 </div>
-<div class="messages">
-<div class="senderMessage"></div>
-<div class="recieverMessage"></div>
-</div>
+<div class="messages"></div>
 <div id="sendMessage">
 <input id="write" type="text" placeholder="Write message..." />
 <input id="submit" type="button" value="Send" />
 </div
 </div>
 `
-class Chat extends window.HTMLElement {
+export class Chat extends window.HTMLElement {
   constructor () {
     super()
 
@@ -61,10 +58,16 @@ class Chat extends window.HTMLElement {
     const socket = new window.WebSocket('ws://vhost3.lnu.se:20080/socket/', 'mychannel')
     socket.addEventListener('open', event => {
       socket.send(JSON.stringify(data))
-      this.shadowRoot.querySelector('.senderMessage').innerHTML = data.data
+      const message = document.createElement('p')
+      message.setAttribute('class', 'senderMessage')
+      message.innerHTML = data.username + ' : ' + data.data
+      this.shadowRoot.querySelector('.messages').appendChild(message)
     })
     socket.addEventListener('message', event => {
-      this.shadowRoot.querySelector('.recieverMessage').innerHTML = data.data
+      const message = JSON.parse(event.data)
+      if (message.type === 'notification') {
+        this.shadowRoot.querySelector('.recieverMessage').innerHTML = message.data
+      }
     })
   }
 }
