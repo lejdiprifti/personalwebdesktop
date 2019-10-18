@@ -10,7 +10,6 @@ template.innerHTML = `
 <div class="navbar">
 <img id="pic" src="../image/conversation.png" alt="chat" />
 <img id="close" src="../image/error.png" alt="close window" />
-<p id="timestamp"></p>
 </div>
 <div class="messages"></div>
 <div class="sendMessage removed">
