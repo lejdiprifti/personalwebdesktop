@@ -12,10 +12,10 @@ template.innerHTML = `
 <p id="timestamp"></p>
 </div>
 <div class="messages"></div>
-<div id="sendMessage">
-<input id="write" type="text" placeholder="Write message..." />
+<div class="sendMessage removed">
+<input id="write" type="text" />
 <input id="submit" type="button" value="Send" />
-</div
+</div>
 </div>
 `
 export class Chat extends window.HTMLElement {
@@ -24,16 +24,39 @@ export class Chat extends window.HTMLElement {
 
     this.attachShadow({ mode: 'open' })
     this.shadowRoot.appendChild(template.content.cloneNode(true))
-    this.time = this.shadowRoot.querySelector('#timestamp')
+    this.socket = new WebSocket('ws://vhost3.lnu.se:20080/socket/', 'mychannel')
+    this.socket.onmessage = event => this.updateChat(event)
   }
 
   connectedCallback () {
-    this.time.innerHTML = new Date().getDate() + '-' + new Date().getMonth() + '-' + new Date().getFullYear()
+    this.pickUsername()
     this.closeWindow()
-    // when submit clicked send the message inside input
-    this.shadowRoot.querySelector('#submit').addEventListener('click', event => {
-      this.sendMessage(this.shadowRoot.querySelector('#write').value)
-    })
+  }
+
+  pickUsername () {
+    if (window.localStorage.getItem('username') === null) {
+      const chat = this.shadowRoot.querySelector('#chat')
+      const loginDiv = document.createElement('div')
+      loginDiv.setAttribute('class', 'login')
+      const input = document.createElement('input')
+      input.setAttribute('id', 'write')
+      input.setAttribute('type', 'text')
+      const submit = document.createElement('input')
+      submit.setAttribute('type', 'submit')
+      loginDiv.appendChild(input)
+      loginDiv.appendChild(submit)
+      loginDiv.style.top = chat.clientTop
+      this.shadowRoot.appendChild(loginDiv)
+      submit.addEventListener('click', event => {
+        window.localStorage.setItem('username', input.value)
+        if (window.localStorage.getItem('username').length > 0) {
+          loginDiv.classList.add('removed')
+          this.chat()
+        }
+      })
+    } else {
+      this.chat()
+    }
   }
 
   closeWindow () {
@@ -47,28 +70,47 @@ export class Chat extends window.HTMLElement {
     })
   }
 
+  chat () {
+    const sendMsgDiv = this.shadowRoot.querySelector('.sendMessage')
+    sendMsgDiv.classList.remove('removed')
+    const submit = this.shadowRoot.querySelector('#submit')
+    const input = this.shadowRoot.querySelector('#write')
+    input.innerHTML = ''
+    input.setAttribute('placeholder', 'Write a message...')
+    submit.addEventListener('click', event => {
+      event.stopPropagation()
+      this.sendMessage(input.value)
+      input.value = ''
+    })
+  }
+
   sendMessage (message) {
     const data = {
       type: 'message',
       data: message,
-      username: 'MyFancyUsername',
+      username: window.localStorage.getItem('username'),
       channel: 'mychannel',
       key: 'eDBE76deU7L0H9mEBgxUKVR0VCnq0XBd'
     }
-    const socket = new window.WebSocket('ws://vhost3.lnu.se:20080/socket/', 'mychannel')
-    socket.addEventListener('open', event => {
-      socket.send(JSON.stringify(data))
-      const message = document.createElement('p')
-      message.setAttribute('class', 'senderMessage')
-      message.innerHTML = data.username + ' : ' + data.data
-      this.shadowRoot.querySelector('.messages').appendChild(message)
-    })
-    socket.addEventListener('message', event => {
-      const message = JSON.parse(event.data)
-      if (message.type === 'notification') {
-        this.shadowRoot.querySelector('.recieverMessage').innerHTML = message.data
-      }
-    })
+    // show the sender message
+    this.socket.send(JSON.stringify(data))
+    const sentMsg = document.createElement('p')
+    sentMsg.setAttribute('class', 'senderMessage')
+    sentMsg.innerHTML = data.username + ' : ' + data.data
+    this.shadowRoot.querySelector('.messages').appendChild(sentMsg)
+  }
+
+  updateChat (msg) {
+    // check if the reciever message is from the same user that sent it
+    const message = JSON.parse(msg.data)
+    console.log(message)
+    if (message.username !== window.localStorage.getItem('username') && message.username !== 'The Server') {
+      console.log('message arrived')
+      const recieverMessage = document.createElement('p')
+      recieverMessage.setAttribute('class', 'recieverMessage')
+      recieverMessage.innerHTML = message.username + ' : ' + message.data
+      this.shadowRoot.querySelector('.messages').appendChild(recieverMessage)
+    }
   }
 }
 
