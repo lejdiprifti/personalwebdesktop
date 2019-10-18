@@ -13,7 +13,7 @@ template.innerHTML = `
 </div>
 <div class="messages"></div>
 <div class="sendMessage removed">
-<input id="write" type="text" />
+<input id="write" type="text" placeholder="Write a message..." />
 <input id="submit" type="button" value="Send" />
 </div>
 </div>
@@ -35,25 +35,26 @@ export class Chat extends window.HTMLElement {
 
   pickUsername () {
     if (window.localStorage.getItem('username') === null) {
-      const chat = this.shadowRoot.querySelector('#chat')
-      const loginDiv = document.createElement('div')
-      loginDiv.setAttribute('class', 'login')
+      const loginDiv = this.shadowRoot.querySelector('.messages')
+      loginDiv.classList.add('login')
+
       const input = document.createElement('input')
-      input.setAttribute('id', 'write')
       input.setAttribute('type', 'text')
+      input.setAttribute('placeholder', 'Pick a username...')
+
       const submit = document.createElement('input')
       submit.setAttribute('type', 'submit')
-      loginDiv.appendChild(input)
-      loginDiv.appendChild(submit)
-      loginDiv.style.top = chat.clientTop
-      this.shadowRoot.appendChild(loginDiv)
+      submit.setAttribute('value', 'Save')
       submit.addEventListener('click', event => {
         window.localStorage.setItem('username', input.value)
-        if (window.localStorage.getItem('username').length > 0) {
-          loginDiv.classList.add('removed')
-          this.chat()
-        }
+
+        input.classList.add('removed')
+        submit.classList.add('removed')
+        loginDiv.classList.remove('login')
+        this.chat()
       })
+      loginDiv.appendChild(input)
+      loginDiv.appendChild(submit)
     } else {
       this.chat()
     }
@@ -75,10 +76,8 @@ export class Chat extends window.HTMLElement {
     sendMsgDiv.classList.remove('removed')
     const submit = this.shadowRoot.querySelector('#submit')
     const input = this.shadowRoot.querySelector('#write')
-    input.innerHTML = ''
-    input.setAttribute('placeholder', 'Write a message...')
+    console.log(input.value)
     submit.addEventListener('click', event => {
-      event.stopPropagation()
       this.sendMessage(input.value)
       input.value = ''
     })
