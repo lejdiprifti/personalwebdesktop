@@ -1,6 +1,7 @@
 import './chat.js'
+import './paint-board.js'
 import { dragElement } from './drag.js'
-export { openChat }
+export { openChat, openPainting }
 // the coordinates of the windows
 let topChat = 0
 let leftChat = 0
@@ -34,5 +35,16 @@ function openChat () {
       leftChat = leftChat + 10
     }
     document.body.appendChild(chat)
+  })
+}
+
+// open painting tools
+function openPainting () {
+  const paintingIcon = document.querySelector('#paint')
+  paintingIcon.addEventListener('click', event => {
+    const paint = document.createElement('paint-board')
+    paint.style.position = 'absolute'
+    dragElement(paint)
+    document.body.appendChild(paint)
   })
 }
