@@ -1,11 +1,19 @@
 import './chat.js'
+import { dragElement } from './drag.js'
+export { openChat }
+// the coordinates of the windows
 let topChat = 0
 let leftChat = 0
+
 function openChat () {
   const chatIcon = document.querySelector('#chat')
+  // create a chat board element for every click
   chatIcon.addEventListener('click', event => {
     const chat = document.createElement('chat-board')
     chat.style.position = 'absolute'
+    // implementing draggable functionality on the board
+    dragElement(chat)
+    // for every click, stack the windows
     if (topChat < 150) {
       chat.style.top = topChat + 'px'
       chat.style.left = leftChat + 'px'
@@ -28,5 +36,3 @@ function openChat () {
     document.body.appendChild(chat)
   })
 }
-
-export { openChat }

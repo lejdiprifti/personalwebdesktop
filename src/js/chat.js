@@ -8,6 +8,7 @@ template.innerHTML = `
 </head>
 <div id="chat">
 <div class="navbar">
+<img id="pic" src="../image/conversation.png" alt="chat" />
 <img id="close" src="../image/error.png" alt="close window" />
 <p id="timestamp"></p>
 </div>
@@ -41,13 +42,15 @@ export class Chat extends window.HTMLElement {
       const input = document.createElement('input')
       input.setAttribute('type', 'text')
       input.setAttribute('placeholder', 'Pick a username...')
-
+      // get focus when clicked
+      input.addEventListener('click', event => {
+        input.focus()
+      })
       const submit = document.createElement('input')
       submit.setAttribute('type', 'submit')
       submit.setAttribute('value', 'Save')
       submit.addEventListener('click', event => {
         window.localStorage.setItem('username', input.value)
-
         input.classList.add('removed')
         submit.classList.add('removed')
         loginDiv.classList.remove('login')
@@ -61,13 +64,11 @@ export class Chat extends window.HTMLElement {
   }
 
   closeWindow () {
-    const close = this.shadowRoot.querySelectorAll('#chat')
-    close.forEach(element => {
-      element.addEventListener('click', event => {
-        if (event.target === this.shadowRoot.querySelector('#close')) {
-          element.classList.add('removed')
-        }
-      })
+    const close = this.shadowRoot.querySelector('#chat')
+    close.addEventListener('click', event => {
+      if (event.target === this.shadowRoot.querySelector('#close')) {
+        close.classList.add('removed')
+      }
     })
   }
 
@@ -76,7 +77,10 @@ export class Chat extends window.HTMLElement {
     sendMsgDiv.classList.remove('removed')
     const submit = this.shadowRoot.querySelector('#submit')
     const input = this.shadowRoot.querySelector('#write')
-    console.log(input.value)
+    // get focus when clicked
+    input.addEventListener('click', event => {
+      input.focus()
+    })
     submit.addEventListener('click', event => {
       this.sendMessage(input.value)
       input.value = ''

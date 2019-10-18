@@ -1,4 +1,5 @@
 #chat {
+    position: absolute;
     border: 1px solid cadetblue;
     background-color: #444;
     width: 600px;
@@ -8,6 +9,11 @@
     cursor: pointer;
     float:right;
     margin: 2px;
+}
+#pic {
+    float:left;
+    margin: 2px;
+    width: 16px;
 }
 #timestamp {
     float: left;
@@ -20,6 +26,7 @@
 }
 
 .navbar {
+    cursor: move;
     background-color: rgb(247, 245, 245);
     height: 20px;
 }
