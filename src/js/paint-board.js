@@ -19,8 +19,7 @@ template.innerHTML = `
 <div id="green" class="colour"></div>
 <div id="yellow" class="colour"></div>
 <div class="colour">
-<img id="brush" src="../image/brush.png" alt="brush" />
-<input id="brushValue" type="number" />
+<input id="brushValue" type="number" placeholder="width" />
 </div>
 <div class="colour"><img id="bucket" src="../image/paint-bucket.png" alt="bucket" /></div>
 </div>
@@ -54,7 +53,8 @@ export class PaintBoard extends window.HTMLElement {
     this.initialize()
     this.closeWindow()
     this.changeColour()
-    this.changeFont()
+    this.changeLineWidth()
+    this.changeBackground()
   }
 
   closeWindow () {
@@ -89,7 +89,6 @@ export class PaintBoard extends window.HTMLElement {
     window.ctx.beginPath() // begin the drawing path
     window.ctx.lineCap = 'round' // rounded end cap
     window.ctx.strokeStyle = window.colour // hex color of line
-    console.log(window.colour)
     window.ctx.moveTo(this.x, this.y) // from position
     this.x = e.clientX
     this.y = e.clientY
@@ -155,7 +154,7 @@ export class PaintBoard extends window.HTMLElement {
   * whenever the value changes, the lineWidth will be updated
   * whenever the user clicks on the input field, it will get focus.
   */
-  changeFont () {
+  changeLineWidth () {
     const font = this.shadowRoot.querySelector('#brushValue')
     font.focus()
     font.addEventListener('change', event => {
@@ -163,6 +162,15 @@ export class PaintBoard extends window.HTMLElement {
     })
     font.addEventListener('click', event => {
       font.focus()
+    })
+  }
+
+  changeBackground () {
+    const bucket = this.shadowRoot.querySelector('#bucket')
+    bucket.addEventListener('click', event => {
+      console.log(window.colour)
+      window.ctx.fillStyle = window.colour + ''
+      window.ctx.fillRect(0, 0, window.ctx.canvas.width, window.ctx.canvas.height)
     })
   }
 }

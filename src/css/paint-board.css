@@ -3,7 +3,7 @@
     border: 1px solid cadetblue;
     background-color: white;
     width: 800px;
-    height: 500px;
+    height: 530px;
 }
 
 #close {
@@ -19,7 +19,7 @@
 .navbar {
     cursor: move;
     background-color: rgb(247, 245, 245);
-    height: 20px;
+    height: 24px;
 }
 .removed {
     display: none;
@@ -59,9 +59,18 @@
 #purple {
     background-color: purple;
 }
+
+#line img {
+    width: 50px
+}
 .colour {
     cursor: pointer;
     float: left;
     width: 50px;
     height: 50px;
+}
+
+#brushValue {
+    margin-top: 10px;
+    width: 45px;
 }
