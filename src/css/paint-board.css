@@ -3,7 +3,7 @@
     border: 1px solid cadetblue;
     background-color: white;
     width: 800px;
-    height: 400px;
+    height: 500px;
 }
 
 #close {
@@ -40,7 +40,27 @@
 #black {
     background-color: #444;
 }
+
+#yellow {
+    background-color: yellow;
+}
+
+#blue {
+    background-color: blue;
+}
+#green {
+    background-color: green;
+}
+
+#cyan {
+    background-color: cyan;
+}
+
+#purple {
+    background-color: purple;
+}
 .colour {
+    cursor: pointer;
     float: left;
     width: 50px;
     height: 50px;
