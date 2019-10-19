@@ -18,10 +18,12 @@ template.innerHTML = `
 <div id="purple" class="colour"></div>
 <div id="green" class="colour"></div>
 <div id="yellow" class="colour"></div>
-<div class="colour">
-<input id="brushValue" type="number" placeholder="width" />
+<div id="input" class="colour">
+<input id="brushValue" type="text" placeholder="width" />
 </div>
-<div class="colour"><img id="bucket" src="../image/paint-bucket.png" alt="bucket" /></div>
+<div id="bucketDiv" class="colour">
+<img id="bucket" src="../image/paint-bucket.png" alt="bucket" />
+</div>
 </div>
 <div id="paint">
 <canvas id="canvasDrawing">
@@ -99,7 +101,7 @@ export class PaintBoard extends window.HTMLElement {
   // size canvas
   size () {
     window.ctx.canvas.width = 750
-    window.ctx.canvas.height = 480
+    window.ctx.canvas.height = 510
   }
 
   // new position from mouse events
