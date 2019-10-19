@@ -1,3 +1,4 @@
+import { dragElement } from './drag.js'
 const template = document.createElement('template')
 template.innerHTML = `
 <head>
@@ -17,6 +18,7 @@ template.innerHTML = `
 <div id="purple" class="colour"></div>
 <div id="green" class="colour"></div>
 <div id="yellow" class="colour"></div>
+<div id="line" class="colour"><img src="../image/substract.png" alt="line" /></div>
 </div>
 <div id="paint">
 <canvas id="canvasDrawing">
@@ -50,6 +52,33 @@ export class PaintBoard extends window.HTMLElement {
     this.changeColour()
   }
 
+  closeWindow () {
+    const close = this.shadowRoot.querySelector('#board')
+    close.addEventListener('click', event => {
+      if (event.target === this.shadowRoot.querySelector('#close')) {
+        close.classList.add('removed')
+      }
+    })
+  }
+
+  // intialize drawing on the board
+  initialize () {
+    const paintingBoard = this.shadowRoot.querySelector('#paint')
+    this.size()
+    paintingBoard.addEventListener('mousemove', event => {
+      event.stopImmediatePropagation()
+      this.draw(event)
+    })
+    paintingBoard.addEventListener('mousedown', event => {
+      event.stopImmediatePropagation()
+      this.setPosition(event)
+    })
+    paintingBoard.addEventListener('mouseenter', event => {
+      this.setPosition(event)
+    })
+    dragElement(this.shadowRoot.querySelector('#board'))
+  }
+
   draw (e) {
     if (e.buttons !== 1) return // if mouse is pressed.....
     window.ctx.beginPath() // begin the drawing path
@@ -64,26 +93,8 @@ export class PaintBoard extends window.HTMLElement {
     window.ctx.stroke() // draw it!
   }
 
-  closeWindow () {
-    const close = this.shadowRoot.querySelector('#board')
-    close.addEventListener('click', event => {
-      if (event.target === this.shadowRoot.querySelector('#close')) {
-        close.classList.add('removed')
-      }
-    })
-  }
-
-  // intialize drawing on the board
-  initialize () {
-    const board = this.shadowRoot.querySelector('#board')
-    this.resize()
-    board.addEventListener('mousemove', this.draw)
-    board.addEventListener('mousedown', this.setPosition)
-    board.addEventListener('mouseenter', this.setPosition)
-  }
-
-  // resize canvas when window is resized
-  resize () {
+  // size canvas
+  size () {
     window.ctx.canvas.width = 750
     window.ctx.canvas.height = 480
   }
@@ -96,35 +107,42 @@ export class PaintBoard extends window.HTMLElement {
 
   changeColour () {
     this.shadowRoot.querySelector('#red').addEventListener('click', event => {
+      event.stopImmediatePropagation()
       window.colour = 'red'
-      console.log('red')
     })
 
     this.shadowRoot.querySelector('#pink').addEventListener('click', event => {
+      event.stopImmediatePropagation()
       window.colour = 'pink'
     })
 
     this.shadowRoot.querySelector('#black').addEventListener('click', event => {
+      event.stopImmediatePropagation()
       window.colour = 'black'
     })
 
     this.shadowRoot.querySelector('#yellow').addEventListener('click', event => {
+      event.stopImmediatePropagation()
       window.colour = 'yellow'
     })
 
     this.shadowRoot.querySelector('#purple').addEventListener('click', event => {
+      event.stopImmediatePropagation()
       window.colour = 'purple'
     })
 
     this.shadowRoot.querySelector('#cyan').addEventListener('click', event => {
+      event.stopImmediatePropagation()
       window.colour = 'cyan'
     })
 
     this.shadowRoot.querySelector('#green').addEventListener('click', event => {
+      event.stopImmediatePropagation()
       window.colour = 'green'
     })
 
     this.shadowRoot.querySelector('#blue').addEventListener('click', event => {
+      event.stopImmediatePropagation()
       window.colour = 'blue'
     })
   }

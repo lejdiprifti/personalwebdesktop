@@ -46,13 +46,12 @@ function openPainting () {
   paintingIcon.addEventListener('click', event => {
     const paint = document.createElement('paint-board')
     paint.style.position = 'absolute'
-    console.log(paint.querySelector('#board'))
-    if (topPaint < 150) {
+    if (topPaint < 60) {
       paint.style.top = topPaint + 'px'
       paint.style.left = leftPaint + 'px'
       topPaint = topPaint + 10
       leftPaint = leftPaint + 10
-    } else if (leftPaint < 730) {
+    } else if (leftPaint < 500) {
       topPaint = 0
       paint.style.top = topPaint + 'px'
       paint.style.left = leftPaint + 'px'
@@ -60,7 +59,7 @@ function openPainting () {
       leftPaint = leftPaint + 10
     } else {
       topPaint = 0
-      leftChat = 0
+      leftPaint = 0
       paint.style.top = topPaint + 'px'
       paint.style.left = leftPaint + 'px'
       topPaint = topPaint + 10
