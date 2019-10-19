@@ -39,12 +39,33 @@ function openChat () {
 }
 
 // open painting tools
+let topPaint = 0
+let leftPaint = 0
 function openPainting () {
   const paintingIcon = document.querySelector('#paint')
   paintingIcon.addEventListener('click', event => {
     const paint = document.createElement('paint-board')
     paint.style.position = 'absolute'
-    dragElement(paint)
+    console.log(paint.querySelector('#board'))
+    if (topPaint < 150) {
+      paint.style.top = topPaint + 'px'
+      paint.style.left = leftPaint + 'px'
+      topPaint = topPaint + 10
+      leftPaint = leftPaint + 10
+    } else if (leftPaint < 730) {
+      topPaint = 0
+      paint.style.top = topPaint + 'px'
+      paint.style.left = leftPaint + 'px'
+      topPaint = topPaint + 10
+      leftPaint = leftPaint + 10
+    } else {
+      topPaint = 0
+      leftChat = 0
+      paint.style.top = topPaint + 'px'
+      paint.style.left = leftPaint + 'px'
+      topPaint = topPaint + 10
+      leftPaint = leftPaint + 10
+    }
     document.body.appendChild(paint)
   })
 }
