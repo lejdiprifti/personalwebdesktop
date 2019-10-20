@@ -1,3 +1,4 @@
-import { openChat, openPainting } from './desktop.js'
+import { openChat, openPainting, openMemoryGame } from './desktop.js'
 openChat()
 openPainting()
+openMemoryGame()

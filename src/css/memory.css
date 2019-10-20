@@ -1,0 +1,26 @@
+#board {
+    position: absolute;
+    border: 1px solid cadetblue;
+    background-color: white;
+    width: 600px;
+    height: 400px;
+}
+
+#close {
+    cursor: pointer;
+    float:right;
+    margin: 2px;
+}
+#pic {
+    float:left;
+    margin: 2px;
+    width: 16px;
+}
+.navbar {
+    cursor: move;
+    background-color: rgb(247, 245, 245);
+    height: 24px;
+}
+.removed {
+    display: none;
+}

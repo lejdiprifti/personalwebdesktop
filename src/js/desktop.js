@@ -1,7 +1,8 @@
 import './chat.js'
 import './paint-board.js'
+import './memory-game.js'
 import { dragElement } from './drag.js'
-export { openChat, openPainting }
+export { openChat, openPainting, openMemoryGame }
 // the coordinates of the windows
 let topChat = 0
 let leftChat = 0
@@ -66,5 +67,13 @@ function openPainting () {
       leftPaint = leftPaint + 10
     }
     document.body.appendChild(paint)
+  })
+}
+
+function openMemoryGame () {
+  const memIcon = document.body.querySelector('#memory')
+  memIcon.addEventListener('click', event => {
+    const memGame = document.createElement('memory-game')
+    document.body.appendChild(memGame)
   })
 }
