@@ -24,3 +24,11 @@
 .removed {
     display: none;
 }
+
+.tabs {
+    width: 80px;
+}
+
+.hidden {
+    visibility: hidden;
+}

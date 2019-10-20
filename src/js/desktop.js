@@ -74,6 +74,8 @@ function openMemoryGame () {
   const memIcon = document.body.querySelector('#memory')
   memIcon.addEventListener('click', event => {
     const memGame = document.createElement('memory-game')
+    memGame.style.position = 'absolute'
     document.body.appendChild(memGame)
+    dragElement(memGame)
   })
 }
