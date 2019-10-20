@@ -10,7 +10,7 @@ template.innerHTML = `
 </div>
 <div id="tools"> 
 <div id="timer">Timer is running...</div>
-<div id="clicks"></div>
+<div id="clicks">Number of clicks: 0</div>
 </div>
 <div id="container">
 <template>
@@ -32,9 +32,9 @@ export class MemoryGame extends window.HTMLElement {
   }
 
   connectedCallback () {
-    this.createGame(2, 2)
+    this.createGame(4, 4)
     this.closeWindow()
-    this.addTimer(10)
+    this.addTimer(20)
   }
 
   closeWindow () {
@@ -54,58 +54,56 @@ export class MemoryGame extends window.HTMLElement {
     const memoryTemplate = this.shadowRoot.querySelector('#container template').content.firstElementChild
     const div = document.importNode(memoryTemplate, false)
     const picArray = this.shufflePictures(rows, cols)
+    const clicksDiv = this.shadowRoot.querySelector('#clicks')
+    let clicks = 0
     picArray.forEach(function (tab, index) {
       img = document.importNode(memoryTemplate.firstElementChild, true)
-      img.setAttribute('id', 'pic' + index)
+      img.firstElementChild.setAttribute('data-tab', tab)
       div.appendChild(img)
       if ((index + 1) % cols === 0) {
         div.appendChild(document.createElement('br'))
       }
-      div.addEventListener('keyup', event => {
-        event.preventDefault()
-        if (event.keyCode === 13) {
-          if (this.shadowRoot.querySelectorAll('.hidden').length === rows * cols) {
-            console.log('You won')
-          }
-          const targetImg = event.target.nodeName === 'IMG' ? event.target : event.target.firstElementChild
-          // if guess2 contains data, you shall not be able to click another tab
-          if (guess2) {
-            return
-          }
-
-          targetImg.src = '../image/memory/' + tab + '.png'
-          if (!guess1) {
-            guess1 = targetImg
-          } else {
-            if (targetImg === guess1) {
-              return
-            }
-            guess2 = targetImg
-            if (guess1.src === guess2.src) {
-              setTimeout(function () {
-                guess1.parentNode.classList.add('hidden')
-                guess2.parentNode.classList.add('hidden')
-                guess1 = null
-                guess2 = null
-              }, 400)
-            } else {
-              window.setTimeout(function () {
-                guess1.src = '../image/memory/0.png'
-                guess2.src = '../image/memory/0.png'
-                guess1 = null
-                guess2 = null
-              }, 500)
-            }
-          }
+    })
+    div.addEventListener('click', event => {
+      event.preventDefault()
+      const targetImg = event.target.nodeName === 'IMG' ? event.target : event.target.firstElementChild
+      // if guess2 contains data, you shall not be able to click another tab
+      if (guess2) {
+        return
+      }
+      targetImg.src = '../image/memory/' + targetImg.getAttribute('data-tab') + '.png'
+      if (!guess1) {
+        guess1 = targetImg
+      } else {
+        if (targetImg === guess1) {
+          return
         }
-      })
+        clicks = clicks + 1
+        clicksDiv.innerHTML = 'Number of clicks: ' + clicks
+        guess2 = targetImg
+        if (guess1.src === guess2.src) {
+          setTimeout(function () {
+            guess1.parentNode.classList.add('hidden')
+            guess2.parentNode.classList.add('hidden')
+            guess1 = null
+            guess2 = null
+          }, 400)
+        } else {
+          window.setTimeout(function () {
+            guess1.src = '../image/memory/0.png'
+            guess2.src = '../image/memory/0.png'
+            guess1 = null
+            guess2 = null
+          }, 500)
+        }
+      }
     })
     container.appendChild(div)
   }
 
   shufflePictures (rows, cols) {
     const array = []
-    let i = 0
+    let i
 
     for (i = 1; i <= rows * cols / 2; i++) {
       array.push(i)
@@ -136,7 +134,7 @@ export class MemoryGame extends window.HTMLElement {
   }
 
   displayGameOver () {
-    this.shadowRoot.querySelector('#container').innerHTML = ''
+    this.shadowRoot.querySelector('#container').classList.add('removed')
     console.log('game over')
   }
 }
