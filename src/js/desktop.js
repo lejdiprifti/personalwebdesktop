@@ -70,11 +70,32 @@ function openPainting () {
   })
 }
 
+let topMem = 0
+let leftMem = 0
 function openMemoryGame () {
   const memIcon = document.body.querySelector('#memory')
   memIcon.addEventListener('click', event => {
     const memGame = document.createElement('memory-game')
     memGame.style.position = 'absolute'
+    if (topMem < 60) {
+      memGame.style.top = topMem + 'px'
+      memGame.style.left = leftMem + 'px'
+      topMem = topMem + 10
+      leftMem = leftMem + 10
+    } else if (leftMem < 500) {
+      topMem = 0
+      memGame.style.top = topMem + 'px'
+      memGame.style.left = leftMem + 'px'
+      topMem = topMem + 10
+      leftMem = leftMem + 10
+    } else {
+      topMem = 0
+      leftMem = 0
+      memGame.style.top = topMem + 'px'
+      memGame.style.left = leftMem + 'px'
+      topMem = topMem + 10
+      leftMem = leftMem + 10
+    }
     document.body.appendChild(memGame)
     dragElement(memGame)
   })
