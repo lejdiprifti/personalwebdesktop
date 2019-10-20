@@ -18,6 +18,7 @@ function dragElement (element) {
 
   function elementDrag (e) {
     e = e || window.event
+    element.style.opacity = 0.5
     e.preventDefault()
     // calculate the new cursor position:
     pos1 = pos3 - e.clientX
@@ -31,6 +32,7 @@ function dragElement (element) {
 
   function closeDragElement () {
     // stop moving the window when mouse button is released
+    element.style.opacity = 1
     document.onmouseup = null
     document.onmousemove = null
   }
