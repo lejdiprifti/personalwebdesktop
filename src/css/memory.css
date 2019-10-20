@@ -32,3 +32,28 @@
 .hidden {
     visibility: hidden;
 }
+
+#tools {
+    float: right;
+    background-color: #444;
+    height: 100px;
+    width: 300px;
+}
+
+#timer {
+    background-color: rgb(94, 93, 93);
+    width: 240px;
+    text-align: center;
+    height: 25px;
+    margin-left: 30px;
+    margin-top: 15px;
+}
+
+#clicks {
+    background-color: rgb(94, 93, 93);
+    width: 240px;
+    text-align: center;
+    height: 25px;
+    margin-left: 30px;
+    margin-top: 20px;
+}

@@ -8,9 +8,15 @@ template.innerHTML = `
 <img id="pic" src="../image/memory.png" alt="memory" />
 <img id="close" src="../image/error.png" alt="close window" />
 </div>
+<div id="tools"> 
+<div id="timer">Timer is running...</div>
+<div id="clicks"></div>
+</div>
 <div id="container">
 <template>
-<a href="#"><img class="tabs" src="../image/memory/0.png" alt="memory tab" /></a>
+<div class="memoryDiv">
+    <a href="#"><img class="tabs" src="../image/memory/0.png" alt="memory tab" /></a>
+</div>
 </template>
 </div>
 </div>
@@ -21,11 +27,14 @@ export class MemoryGame extends window.HTMLElement {
     super()
     this.attachShadow({ mode: 'open' })
     this.shadowRoot.appendChild(template.content.cloneNode(true))
+    this.timer = ''
+    this.isTimeOver = false
   }
 
   connectedCallback () {
     this.createGame(2, 2)
     this.closeWindow()
+    this.addTimer(10)
   }
 
   closeWindow () {
@@ -42,18 +51,22 @@ export class MemoryGame extends window.HTMLElement {
     let guess1
     let guess2
     const container = this.shadowRoot.querySelector('#container')
-    const picTemplate = this.shadowRoot.querySelector('#container template').content.firstElementChild
+    const memoryTemplate = this.shadowRoot.querySelector('#container template').content.firstElementChild
+    const div = document.importNode(memoryTemplate, false)
     const picArray = this.shufflePictures(rows, cols)
     picArray.forEach(function (tab, index) {
-      img = document.importNode(picTemplate, true)
+      img = document.importNode(memoryTemplate.firstElementChild, true)
       img.setAttribute('id', 'pic' + index)
-      container.appendChild(img)
+      div.appendChild(img)
       if ((index + 1) % cols === 0) {
-        container.appendChild(document.createElement('br'))
+        div.appendChild(document.createElement('br'))
       }
-      img.addEventListener('keyup', event => {
+      div.addEventListener('keyup', event => {
+        event.preventDefault()
         if (event.keyCode === 13) {
-          event.preventDefault()
+          if (this.shadowRoot.querySelectorAll('.hidden').length === rows * cols) {
+            console.log('You won')
+          }
           const targetImg = event.target.nodeName === 'IMG' ? event.target : event.target.firstElementChild
           // if guess2 contains data, you shall not be able to click another tab
           if (guess2) {
@@ -87,6 +100,7 @@ export class MemoryGame extends window.HTMLElement {
         }
       })
     })
+    container.appendChild(div)
   }
 
   shufflePictures (rows, cols) {
@@ -107,10 +121,23 @@ export class MemoryGame extends window.HTMLElement {
     return array
   }
 
-  checkWin (rows, cols) {
-    if (this.shadowRoot.querySelectorAll('.hidden') === rows * cols) {
-      console.log('You won')
+  addTimer (i) {
+    if (i >= 0) {
+      this.timer = setTimeout(timeout => {
+        const spanTimeTag = this.shadowRoot.querySelector('#timer')
+        spanTimeTag.textContent = 'Timer: ' + i + 's'
+        this.isTimeOver = false
+        this.addTimer(--i)
+      }, 1000)
+    } else {
+      this.isTimeOver = true
+      this.displayGameOver()
     }
+  }
+
+  displayGameOver () {
+    this.shadowRoot.querySelector('#container').innerHTML = ''
+    console.log('game over')
   }
 }
 window.customElements.define('memory-game', MemoryGame)
