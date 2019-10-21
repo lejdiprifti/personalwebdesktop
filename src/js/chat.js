@@ -49,11 +49,13 @@ export class Chat extends window.HTMLElement {
       submit.setAttribute('type', 'submit')
       submit.setAttribute('value', 'Save')
       submit.addEventListener('click', event => {
-        window.localStorage.setItem('username', input.value)
-        input.classList.add('removed')
-        submit.classList.add('removed')
-        loginDiv.classList.remove('login')
-        this.chat()
+        if (input.value.length > 0) {
+          window.localStorage.setItem('username', input.value)
+          input.classList.add('removed')
+          submit.classList.add('removed')
+          loginDiv.classList.remove('login')
+          this.chat()
+        }
       })
       loginDiv.appendChild(input)
       loginDiv.appendChild(submit)
@@ -81,8 +83,10 @@ export class Chat extends window.HTMLElement {
       input.focus()
     })
     submit.addEventListener('click', event => {
-      this.sendMessage(input.value)
-      input.value = ''
+      if (input.value.length > 0) {
+        this.sendMessage(input.value)
+        input.value = ''
+      }
     })
   }
 
