@@ -6,18 +6,18 @@ export { openChat, openPainting, openMemoryGame }
 // the coordinates of the windows
 let topChat = 0
 let leftChat = 0
-let zIndexChat = 0
+let zIndex = 0
 function openChat () {
   const chatIcon = document.querySelector('#chat')
   // create a chat board element for every click
   chatIcon.addEventListener('click', event => {
     const chat = document.createElement('chat-board')
     chat.style.position = 'absolute'
-    chat.style.zIndex = zIndexChat
-    zIndexChat = zIndexChat + 1
+    chat.style.zIndex = zIndex
+    zIndex = zIndex + 1
     chat.addEventListener('click', event => {
-      chat.style.zIndex = zIndexChat
-      zIndexChat++
+      chat.style.zIndex = zIndex
+      zIndex++
     })
     // implementing draggable functionality on the board
     dragElement(chat)
@@ -48,17 +48,16 @@ function openChat () {
 // open painting tools
 let topPaint = 0
 let leftPaint = 0
-let zIndexPaint = 0
 function openPainting () {
   const paintingIcon = document.querySelector('#paint')
   paintingIcon.addEventListener('click', event => {
     const paint = document.createElement('paint-board')
-    paint.style.zIndex = zIndexPaint
-    zIndexPaint = zIndexPaint + 1
+    paint.style.zIndex = zIndex
+    zIndex = zIndex + 1
     paint.style.position = 'absolute'
     paint.addEventListener('click', event => {
-      paint.style.zIndex = zIndexPaint
-      zIndexPaint++
+      paint.style.zIndex = zIndex
+      zIndex++
     })
     if (topPaint < 60) {
       paint.style.top = topPaint + 'px'
@@ -85,16 +84,15 @@ function openPainting () {
 
 let topMem = 0
 let leftMem = 0
-let zIndexMem = 0
 function openMemoryGame () {
   const memIcon = document.body.querySelector('#memory')
   memIcon.addEventListener('click', event => {
     const memGame = document.createElement('memory-game')
-    memGame.style.zIndex = zIndexMem
-    zIndexMem = zIndexMem + 1
+    memGame.style.zIndex = zIndex
+    zIndex = zIndex + 1
     memGame.addEventListener('click', event => {
-      memGame.style.zIndex = zIndexMem
-      zIndexMem++
+      memGame.style.zIndex = zIndex
+      zIndex++
     })
     memGame.style.position = 'absolute'
     if (topMem < 60) {
