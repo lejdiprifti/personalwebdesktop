@@ -13,8 +13,7 @@ template.innerHTML = `
 </div>
 <div class="messages"></div>
 <div class="sendMessage removed">
-<input id="write" type="text" placeholder="Write a message..." />
-<input id="submit" type="button" value="Send" />
+<input id="write" type="textarea" placeholder="Write a message..." />
 </div>
 </div>
 `
@@ -31,6 +30,7 @@ export class Chat extends window.HTMLElement {
   connectedCallback () {
     this.pickUsername()
     this.closeWindow()
+    this.shadowRoot.querySelector('#write').focus()
   }
 
   pickUsername () {
@@ -66,7 +66,10 @@ export class Chat extends window.HTMLElement {
 
   closeWindow () {
     const close = this.shadowRoot.querySelector('#chat')
+    const input = this.shadowRoot.querySelector('#write')
     close.addEventListener('click', event => {
+      // whenever the board gets clicked, the focus will be on the input field
+      input.focus()
       if (event.target === this.shadowRoot.querySelector('#close')) {
         close.classList.add('removed')
       }
@@ -76,14 +79,11 @@ export class Chat extends window.HTMLElement {
   chat () {
     const sendMsgDiv = this.shadowRoot.querySelector('.sendMessage')
     sendMsgDiv.classList.remove('removed')
-    const submit = this.shadowRoot.querySelector('#submit')
     const input = this.shadowRoot.querySelector('#write')
     // get focus when clicked
-    input.addEventListener('click', event => {
+    input.addEventListener('keydown', event => {
       input.focus()
-    })
-    submit.addEventListener('click', event => {
-      if (input.value.length > 0) {
+      if (input.value.length > 0 && event.keyCode === 13) {
         this.sendMessage(input.value)
         input.value = ''
       }
