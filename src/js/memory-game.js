@@ -8,7 +8,10 @@ template.innerHTML = `
 <img id="pic" src="../image/memory.png" alt="memory" />
 <img id="close" src="../image/error.png" alt="close window" />
 </div>
-<div id="tools"> 
+<div id="tools">
+<div id="settings">Settings</div>
+</div>
+<div id="data"> 
 <div id="timer">Timer is running...</div>
 <div id="clicks">Number of clicks: 0</div>
 </div>
@@ -34,7 +37,7 @@ export class MemoryGame extends window.HTMLElement {
   connectedCallback () {
     this.createGame(4, 4)
     this.closeWindow()
-    this.addTimer(20)
+    this.addTimer(60)
   }
 
   closeWindow () {
@@ -48,14 +51,18 @@ export class MemoryGame extends window.HTMLElement {
 
   createGame (rows, cols) {
     let img = null
-    let guess1
-    let guess2
+    let guess1 // store the first guess of the user
+    let guess2 // store the second guess of the user
+
     const container = this.shadowRoot.querySelector('#container')
     const memoryTemplate = this.shadowRoot.querySelector('#container template').content.firstElementChild
     const div = document.importNode(memoryTemplate, false)
+
     const picArray = this.shufflePictures(rows, cols)
-    const clicksDiv = this.shadowRoot.querySelector('#clicks')
-    let clicks = 0
+    // display the number of attempts the user does
+    const attemptsDiv = this.shadowRoot.querySelector('#clicks')
+    let attempts = 0
+
     picArray.forEach(function (tab, index) {
       img = document.importNode(memoryTemplate.firstElementChild, true)
       img.firstElementChild.setAttribute('data-tab', tab)
@@ -64,6 +71,10 @@ export class MemoryGame extends window.HTMLElement {
         div.appendChild(document.createElement('br'))
       }
     })
+
+    /**
+     * when the div is clicked, I capture the target of the div and flip the tabs when clicked
+     */
     div.addEventListener('click', event => {
       event.preventDefault()
       const targetImg = event.target.nodeName === 'IMG' ? event.target : event.target.firstElementChild
@@ -78,8 +89,8 @@ export class MemoryGame extends window.HTMLElement {
         if (targetImg === guess1) {
           return
         }
-        clicks = clicks + 1
-        clicksDiv.innerHTML = 'Number of clicks: ' + clicks
+        attempts = attempts + 1
+        attemptsDiv.innerHTML = 'Number of clicks: ' + attempts
         guess2 = targetImg
         if (guess1.src === guess2.src) {
           setTimeout(function () {
@@ -101,6 +112,7 @@ export class MemoryGame extends window.HTMLElement {
     container.appendChild(div)
   }
 
+  // shuffle the pcitures in a random order
   shufflePictures (rows, cols) {
     const array = []
     let i

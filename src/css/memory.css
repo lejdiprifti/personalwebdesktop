@@ -33,7 +33,7 @@
     visibility: hidden;
 }
 
-#tools {
+#data {
     float: right;
     background-color: #444;
     height: 100px;
@@ -58,4 +58,15 @@
     height: 30px;
     margin-left: 30px;
     margin-top: 20px;
+}
+
+#tools {
+    background-color: #444;
+    width: 600px;
+    height: 20px;
+}
+
+#container {
+    margin-top: 10px;
+    margin-left: 5px;
 }
