@@ -78,3 +78,11 @@
 @-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
 @-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
 @keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
+
+#partyGIF {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 600px;
+    height: 400px;
+}
