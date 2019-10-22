@@ -55,3 +55,17 @@
     float:right;
     width: 35px;
 }
+
+#emojis {
+    background-color: rgb(126, 111, 111);
+    border: 2px solid black;
+    position: absolute;
+    right: 20px;
+    bottom: 75px;
+    width: 110px;
+}
+
+#emojis p {
+    cursor: pointer;
+    float: right;
+}

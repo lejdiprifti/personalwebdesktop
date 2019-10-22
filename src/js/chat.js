@@ -16,6 +16,23 @@ Chat
 <div class="sendMessage removed">
 <textarea id="write" placeholder="Write a message..."></textarea>
 <a href="#"><img id="smiley" src="../image/chat/smiley.png" alt="Smiley" /></a>
+<div id="emojis" class="removed">
+<p>&#x1F600</p>
+<p>&#x1F60D</p>
+<p>&#x1F60A</p>
+<p>&#x1F970</p>
+<p>&#x1F493</p>
+<p>&#x1F914</p>
+<p>&#x1F602</p>
+<p>&#x1F44D</p>
+<p>&#x1F97A</p>
+<p>&#x1F644</p>
+<p>&#x1F601</p>
+<p>&#x1F604</p>
+<p>&#x26BD</p>
+<p>&#x1F3C0</p>
+<p>&#x1F974</p>
+</div>
 </div>
 </div>
 `
@@ -32,7 +49,7 @@ export class Chat extends window.HTMLElement {
   connectedCallback () {
     this.pickUsername()
     this.closeWindow()
-    this.addEmoji()
+    this.openEmojis()
     this.shadowRoot.querySelector('#write').focus()
   }
 
@@ -123,11 +140,24 @@ export class Chat extends window.HTMLElement {
     }
   }
 
-  addEmoji () {
+  openEmojis () {
     const smiley = this.shadowRoot.querySelector('#smiley')
-    const input = this.shadowRoot.querySelector('#write')
+    const emojis = this.shadowRoot.querySelector('#emojis')
     smiley.addEventListener('click', event => {
-      input.value = input.value + String.fromCodePoint(0x1F354)
+      event.preventDefault()
+      emojis.classList.toggle('removed')
+      this.addEmojis()
+    })
+  }
+
+  addEmojis () {
+    const emojis = this.shadowRoot.querySelector('#emojis')
+    const input = this.shadowRoot.querySelector('#write')
+    emojis.addEventListener('click', event => {
+      if (event.target.nodeName === 'P') {
+        const code = event.target.innerHTML
+        input.value = input.value + code
+      }
     })
   }
 }
