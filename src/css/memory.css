@@ -86,3 +86,16 @@
     width: 600px;
     height: 400px;
 }
+
+#snoopDog {
+    position: absolute;
+    top: 30px;
+    left: 10px;
+    width: 100px;
+}
+
+#wonGIF {
+    position: absolute;
+    top: 230px;
+    left: 50px;
+}

@@ -25,6 +25,7 @@ Memory Game
 <img src="../image/memory/game-over.png" alt="game over" />
 </div>
 <div id="won" class="removed">
+<img id="snoopDog" src="../image/memory/snoopdog.gif" alt="Snoop Dog" />
 <img id="partyGIF" src="../image/memory/party.gif" alt="Party" />
 <img id="wonGIF" src="../image/memory/youwon.gif" alt="You won" />
 </div>
