@@ -3,7 +3,7 @@
     border: 1px solid cadetblue;
     background-color: #444;
     width: 400px;
-    height: 400px;
+    height: 412px;
 }
 #close {
     cursor: pointer;
@@ -16,8 +16,7 @@
     width: 16px;
 }
 .senderMessage, .recieverMessage {
-    width: 300px;
-    height: 20px;
+    width: 350px;
 }
 
 .navbar {
@@ -31,9 +30,8 @@
 }
 
 .messages {
-    width: 600px;
-    height: 300px;
-    margin-bottom: 2%; 
+    width: 400px;
+    height: 320px;
     overflow-y: auto;
     overflow-x: hidden;
 }
@@ -45,6 +43,15 @@
 
 #write {
     height: 65px;
-    width: 394px;
+    width: 355px;
     resize: none;
+}
+
+.sendMessage {
+    width: 400px;
+}
+
+#smiley {
+    float:right;
+    width: 35px;
 }

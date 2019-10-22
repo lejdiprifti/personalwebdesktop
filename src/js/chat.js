@@ -15,6 +15,7 @@ Chat
 <div class="messages"></div>
 <div class="sendMessage removed">
 <textarea id="write" placeholder="Write a message..."></textarea>
+<a href="#"><img id="smiley" src="../image/chat/smiley.png" alt="Smiley" /></a>
 </div>
 </div>
 `
@@ -31,6 +32,7 @@ export class Chat extends window.HTMLElement {
   connectedCallback () {
     this.pickUsername()
     this.closeWindow()
+    this.addEmoji()
     this.shadowRoot.querySelector('#write').focus()
   }
 
@@ -119,6 +121,14 @@ export class Chat extends window.HTMLElement {
       recieverMessage.innerHTML = message.username + ' : ' + message.data
       this.shadowRoot.querySelector('.messages').appendChild(recieverMessage)
     }
+  }
+
+  addEmoji () {
+    const smiley = this.shadowRoot.querySelector('#smiley')
+    const input = this.shadowRoot.querySelector('#write')
+    smiley.addEventListener('click', event => {
+      input.value = input.value + String.fromCodePoint(0x1F354)
+    })
   }
 }
 
