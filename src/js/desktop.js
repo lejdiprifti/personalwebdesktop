@@ -1,23 +1,25 @@
 import './chat.js'
 import './paint-board.js'
 import './memory-game.js'
+import './change-settings.js'
 import { dragElement } from './drag.js'
-export { openChat, openPainting, openMemoryGame }
+export { openChat, openPainting, openMemoryGame, zIndex, topMem, leftMem }
 // the coordinates of the windows
 let topChat = 0
 let leftChat = 0
-let zIndex = 0
+/**
+ * zIndex stores the z-index, so any window opened next will show above all the others already opened.
+ */
+let zIndexNum = 0
 function openChat () {
   const chatIcon = document.querySelector('#chat')
   // create a chat board element for every click
   chatIcon.addEventListener('click', event => {
     const chat = document.createElement('chat-board')
     chat.style.position = 'absolute'
-    chat.style.zIndex = zIndex
-    zIndex = zIndex + 1
+    chat.style.zIndex = zIndex()
     chat.addEventListener('click', event => {
-      chat.style.zIndex = zIndex
-      zIndex++
+      chat.style.zIndex = zIndex()
     })
     // implementing draggable functionality on the board
     dragElement(chat)
@@ -52,12 +54,10 @@ function openPainting () {
   const paintingIcon = document.querySelector('#paint')
   paintingIcon.addEventListener('click', event => {
     const paint = document.createElement('paint-board')
-    paint.style.zIndex = zIndex
-    zIndex = zIndex + 1
+    paint.style.zIndex = zIndex()
     paint.style.position = 'absolute'
     paint.addEventListener('click', event => {
-      paint.style.zIndex = zIndex
-      zIndex++
+      paint.style.zIndex = zIndex()
     })
     if (topPaint < 60) {
       paint.style.top = topPaint + 'px'
@@ -82,39 +82,54 @@ function openPainting () {
   })
 }
 
-let topMem = 0
-let leftMem = 0
+let topSett = 0
+let leftSett = 0
+let topMemNum = 0
+let leftMemNum = 0
 function openMemoryGame () {
   const memIcon = document.body.querySelector('#memory')
   memIcon.addEventListener('click', event => {
-    const memGame = document.createElement('memory-game')
-    memGame.style.zIndex = zIndex
-    zIndex = zIndex + 1
-    memGame.addEventListener('click', event => {
-      memGame.style.zIndex = zIndex
-      zIndex++
+    const changeSettings = document.createElement('change-settings')
+    dragElement(changeSettings)
+    changeSettings.style.zIndex = zIndex()
+    changeSettings.addEventListener('click', event => {
+      changeSettings.style.zIndex = zIndex()
     })
-    memGame.style.position = 'absolute'
-    if (topMem < 60) {
-      memGame.style.top = topMem + 'px'
-      memGame.style.left = leftMem + 'px'
-      topMem = topMem + 10
-      leftMem = leftMem + 10
-    } else if (leftMem < 500) {
-      topMem = 0
-      memGame.style.top = topMem + 'px'
-      memGame.style.left = leftMem + 'px'
-      topMem = topMem + 10
-      leftMem = leftMem + 10
+    changeSettings.style.position = 'absolute'
+    if (topSett < 60) {
+      changeSettings.style.top = topSett + 'px'
+      changeSettings.style.left = leftSett + 'px'
+      topSett = topSett + 10
+      leftSett = leftSett + 10
+    } else if (leftSett < 500) {
+      topSett = 0
+      changeSettings.style.top = topSett + 'px'
+      changeSettings.style.left = leftSett + 'px'
+      topSett = topSett + 10
+      leftSett = leftSett + 10
     } else {
-      topMem = 0
-      leftMem = 0
-      memGame.style.top = topMem + 'px'
-      memGame.style.left = leftMem + 'px'
-      topMem = topMem + 10
-      leftMem = leftMem + 10
+      topSett = 0
+      leftSett = 0
+      changeSettings.style.top = topSett + 'px'
+      changeSettings.style.left = leftSett + 'px'
+      topSett = topSett + 10
+      leftSett = leftSett + 10
     }
-    document.body.appendChild(memGame)
-    dragElement(memGame)
+    document.body.appendChild(changeSettings)
   })
+}
+
+function zIndex () {
+  zIndexNum = zIndexNum + 1
+  return zIndexNum
+}
+
+function topMem () {
+  topMemNum = topMemNum + 1
+  return topMemNum
+}
+
+function leftMem () {
+  leftMemNum = leftMemNum + 1
+  return leftMemNum
 }
