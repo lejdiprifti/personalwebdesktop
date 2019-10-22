@@ -9,6 +9,7 @@ template.innerHTML = `
 <div id="settings">
 <div class="navbar">
 <img id="pic" src="../image/memory.png" alt="memory" />
+Memory Game
 <img id="close" src="../image/error.png" alt="close window" />
 </div>
 <p>Choose the board</p>
