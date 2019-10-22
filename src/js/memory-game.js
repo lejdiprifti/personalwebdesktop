@@ -1,3 +1,4 @@
+import './change-settings.js'
 const template = document.createElement('template')
 template.innerHTML = `
 <head>
@@ -8,9 +9,6 @@ template.innerHTML = `
 <img id="pic" src="../image/memory.png" alt="memory" />
 <img id="close" src="../image/error.png" alt="close window" />
 </div>
-<div id="tools">
-<div id="settings">Settings</div>
-</div>
 <div id="data"> 
 <div id="timer">Timer is running...</div>
 <div id="clicks">Number of clicks: 0</div>
@@ -18,12 +16,11 @@ template.innerHTML = `
 <div id="container">
 <template>
 <div class="memoryDiv">
-    <a href="#"><img class="tabs" src="../image/memory/0.png" alt="memory tab" /></a>
+    <a href="#"><img class="tabs" src="" alt="memory tab" /></a>
 </div>
 </template>
 </div>
 </div>
-
 `
 export class MemoryGame extends window.HTMLElement {
   constructor () {
@@ -35,7 +32,9 @@ export class MemoryGame extends window.HTMLElement {
   }
 
   connectedCallback () {
-    this.createGame(4, 4)
+    this.createGame(parseInt(this.getAttribute('data-rows')),
+      parseInt(this.getAttribute('data-cols')),
+      this.getAttribute('data-image'))
     this.closeWindow()
     this.addTimer(60)
   }
@@ -49,7 +48,7 @@ export class MemoryGame extends window.HTMLElement {
     })
   }
 
-  createGame (rows, cols) {
+  createGame (rows, cols, dataImage) {
     let img = null
     let guess1 // store the first guess of the user
     let guess2 // store the second guess of the user
@@ -65,6 +64,7 @@ export class MemoryGame extends window.HTMLElement {
 
     picArray.forEach(function (tab, index) {
       img = document.importNode(memoryTemplate.firstElementChild, true)
+      img.firstElementChild.src = '../image/memory/' + dataImage + '/0.png'
       img.firstElementChild.setAttribute('data-tab', tab)
       div.appendChild(img)
       if ((index + 1) % cols === 0) {
@@ -82,7 +82,7 @@ export class MemoryGame extends window.HTMLElement {
       if (guess2) {
         return
       }
-      targetImg.src = '../image/memory/' + targetImg.getAttribute('data-tab') + '.png'
+      targetImg.src = '../image/memory/' + dataImage + '/' + targetImg.getAttribute('data-tab') + '.png'
       if (!guess1) {
         guess1 = targetImg
       } else {
@@ -101,8 +101,8 @@ export class MemoryGame extends window.HTMLElement {
           }, 400)
         } else {
           window.setTimeout(function () {
-            guess1.src = '../image/memory/0.png'
-            guess2.src = '../image/memory/0.png'
+            guess1.src = '../image/memory/' + dataImage + '/0.png'
+            guess2.src = '../image/memory/' + dataImage + '/0.png'
             guess1 = null
             guess2 = null
           }, 500)
