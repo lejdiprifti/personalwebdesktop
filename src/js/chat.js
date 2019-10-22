@@ -50,6 +50,7 @@ export class Chat extends window.HTMLElement {
     this.pickUsername()
     this.closeWindow()
     this.openEmojis()
+    this.addEmojis()
     this.shadowRoot.querySelector('#write').focus()
   }
 
@@ -146,7 +147,6 @@ export class Chat extends window.HTMLElement {
     smiley.addEventListener('click', event => {
       event.preventDefault()
       emojis.classList.toggle('removed')
-      this.addEmojis()
     })
   }
 
