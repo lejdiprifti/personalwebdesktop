@@ -9,11 +9,12 @@ template.innerHTML = `
 <div id="chat">
 <div class="navbar">
 <img id="pic" src="../image/conversation.png" alt="chat" />
+Chat
 <img id="close" src="../image/error.png" alt="close window" />
 </div>
 <div class="messages"></div>
 <div class="sendMessage removed">
-<input id="write" type="textarea" placeholder="Write a message..." />
+<textarea id="write" placeholder="Write a message..."></textarea>
 </div>
 </div>
 `
@@ -73,6 +74,7 @@ export class Chat extends window.HTMLElement {
       if (event.target === this.shadowRoot.querySelector('#close')) {
         close.classList.add('removed')
       }
+      this.socket.close()
     })
   }
 
