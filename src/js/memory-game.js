@@ -7,6 +7,7 @@ template.innerHTML = `
 <div id="board">
 <div class="navbar">
 <img id="pic" src="../image/memory.png" alt="memory" />
+Memory Game
 <img id="close" src="../image/error.png" alt="close window" />
 </div>
 <div id="data"> 
@@ -19,6 +20,9 @@ template.innerHTML = `
     <a href="#"><img class="tabs" src="" alt="memory tab" /></a>
 </div>
 </template>
+</div>
+<div id="gameover" class="removed">
+<img src="../image/memory/game-over.png" alt="game over" />
 </div>
 </div>
 `
@@ -36,7 +40,7 @@ export class MemoryGame extends window.HTMLElement {
       parseInt(this.getAttribute('data-cols')),
       this.getAttribute('data-image'))
     this.closeWindow()
-    this.addTimer(60)
+    this.addTimer(3)
   }
 
   closeWindow () {
@@ -147,7 +151,7 @@ export class MemoryGame extends window.HTMLElement {
 
   displayGameOver () {
     this.shadowRoot.querySelector('#container').classList.add('removed')
-    console.log('game over')
+    this.shadowRoot.querySelector('#gameover').classList.remove('removed')
   }
 }
 window.customElements.define('memory-game', MemoryGame)
