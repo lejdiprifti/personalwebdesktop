@@ -25,8 +25,8 @@ template.innerHTML = `
 <div id="image">
 <input id="image1" type="radio" name="image" value="image1.png" checked>
 <label for="image1"><img src="../image/memory/image1.png" alt="leaves" /></label>
-<input id="image2" type="radio" name="image" value="image2.png">
-<label for="image2"><img src="../image/memory/image2.png" alt="cloud"/></label>
+<input id="image2" type="radio" name="image" value="statue.png">
+<label for="image2"><img src="../image/memory/statue.png" alt="statues"/></label>
 <input id="image3" type="radio" name="image" value="image3.png">
 <label for="image3"><img src="../image/memory/image3.png" alt="earth"/></label>
 </div>
@@ -84,7 +84,7 @@ export class ChangeSettings extends window.HTMLElement {
       if (this.shadowRoot.querySelector('#image1').checked) {
         memGame.setAttribute('data-image', 'leaves.png')
       } else if (this.shadowRoot.querySelector('#image2').checked) {
-        memGame.setAttribute('data-image', 'cloud.png')
+        memGame.setAttribute('data-image', 'monuments')
       } else if (this.shadowRoot.querySelector('#image3').checked) {
         memGame.setAttribute('data-image', 'world')
       }
