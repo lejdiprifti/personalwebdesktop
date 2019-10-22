@@ -81,10 +81,10 @@
 
 #partyGIF {
     position: absolute;
-    top: 0px;
+    top: 20px;
     left: 0px;
     width: 600px;
-    height: 400px;
+    height: 370px;
 }
 
 #snoopDog {
@@ -98,4 +98,11 @@
     position: absolute;
     top: 230px;
     left: 50px;
+}
+
+#someone {
+    width: 200px;
+    position: absolute;
+    top: 30px;
+    left: 160px;
 }
