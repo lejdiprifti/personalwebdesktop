@@ -24,6 +24,9 @@ Memory Game
 <div id="gameover" class="removed">
 <img src="../image/memory/game-over.png" alt="game over" />
 </div>
+<div id="won" class="removed">
+<img src="../image/memory/youwon.gif" alt="You won" />
+</div>
 </div>
 `
 export class MemoryGame extends window.HTMLElement {
@@ -40,7 +43,6 @@ export class MemoryGame extends window.HTMLElement {
       parseInt(this.getAttribute('data-cols')),
       this.getAttribute('data-image'))
     this.closeWindow()
-    this.addTimer(3)
   }
 
   closeWindow () {
@@ -56,7 +58,7 @@ export class MemoryGame extends window.HTMLElement {
     let img = null
     let guess1 // store the first guess of the user
     let guess2 // store the second guess of the user
-
+    this.addTimer(10)
     const container = this.shadowRoot.querySelector('#container')
     const memoryTemplate = this.shadowRoot.querySelector('#container template').content.firstElementChild
     const div = document.importNode(memoryTemplate, false)
@@ -93,10 +95,14 @@ export class MemoryGame extends window.HTMLElement {
         if (targetImg === guess1) {
           return
         }
-        attempts = attempts + 1
-        attemptsDiv.innerHTML = 'Number of clicks: ' + attempts
         guess2 = targetImg
         if (guess1.src === guess2.src) {
+          attempts = attempts + 1
+          attemptsDiv.innerHTML = 'Number of clicks: ' + attempts
+          //  check if the game is won
+          if (attempts === (cols * rows) / 2) {
+            this.checkWin(this.timer)
+          }
           setTimeout(function () {
             guess1.parentNode.classList.add('hidden')
             guess2.parentNode.classList.add('hidden')
@@ -152,6 +158,11 @@ export class MemoryGame extends window.HTMLElement {
   displayGameOver () {
     this.shadowRoot.querySelector('#container').classList.add('removed')
     this.shadowRoot.querySelector('#gameover').classList.remove('removed')
+  }
+
+  checkWin (timer) {
+    this.shadowRoot.querySelector('#won').classList.remove('removed')
+    clearTimeout(timer)
   }
 }
 window.customElements.define('memory-game', MemoryGame)
