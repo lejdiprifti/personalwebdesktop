@@ -47,42 +47,11 @@ export class Chat extends window.HTMLElement {
   }
 
   connectedCallback () {
-    this.pickUsername()
+    this.chat()
     this.closeWindow()
     this.openEmojis()
     this.addEmojis()
     this.shadowRoot.querySelector('#write').focus()
-  }
-
-  pickUsername () {
-    if (window.localStorage.getItem('username') === null) {
-      const loginDiv = this.shadowRoot.querySelector('.messages')
-      loginDiv.classList.add('login')
-
-      const input = document.createElement('input')
-      input.setAttribute('type', 'text')
-      input.setAttribute('placeholder', 'Pick a username...')
-      // get focus when clicked
-      input.addEventListener('click', event => {
-        input.focus()
-      })
-      const submit = document.createElement('input')
-      submit.setAttribute('type', 'submit')
-      submit.setAttribute('value', 'Save')
-      submit.addEventListener('click', event => {
-        if (input.value.length > 0) {
-          window.localStorage.setItem('username', input.value)
-          input.classList.add('removed')
-          submit.classList.add('removed')
-          loginDiv.classList.remove('login')
-          this.chat()
-        }
-      })
-      loginDiv.appendChild(input)
-      loginDiv.appendChild(submit)
-    } else {
-      this.chat()
-    }
   }
 
   closeWindow () {
