@@ -47,8 +47,8 @@ export class PaintBoard extends window.HTMLElement {
     this.x = 0
     this.y = 0
     window.colour = 'black'
-    const canvas = this.shadowRoot.querySelector('#canvasDrawing')
-    window.ctx = canvas.getContext('2d')
+    this.canvas = this.shadowRoot.querySelector('#canvasDrawing')
+    window.ctx = this.canvas.getContext('2d')
   }
 
   connectedCallback () {
@@ -92,8 +92,8 @@ export class PaintBoard extends window.HTMLElement {
     window.ctx.lineCap = 'round' // rounded end cap
     window.ctx.strokeStyle = window.colour // hex color of line
     window.ctx.moveTo(this.x, this.y) // from position
-    this.x = e.clientX
-    this.y = e.clientY
+    this.x = e.pageX - this.canvas.offsetLeft
+    this.y = e.pageY - this.canvas.offsetTop
     window.ctx.lineTo(this.x, this.y) // to position
     window.ctx.stroke() // draw it!
   }
