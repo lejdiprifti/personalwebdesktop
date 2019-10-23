@@ -3,7 +3,7 @@
     border: 1px solid cadetblue;
     background-color: #444;
     width: 400px;
-    height: 412px;
+    height: 430px;
 }
 #close {
     cursor: pointer;
@@ -68,4 +68,12 @@
 #emojis p {
     cursor: pointer;
     float: right;
+}
+
+#tools {
+    height: 10px;
+    width: 400px;
+    background-color: #444;
+    float:right;
+    cursor: pointer;
 }

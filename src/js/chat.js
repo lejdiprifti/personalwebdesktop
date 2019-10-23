@@ -1,3 +1,4 @@
+import { zIndex } from './desktop.js'
 /**
  * creating the chat element
  */
@@ -11,6 +12,9 @@ template.innerHTML = `
 <img id="pic" src="../image/conversation.png" alt="chat" />
 Chat
 <img id="close" src="../image/error.png" alt="close window" />
+</div>
+<div id="tools">
+Change Username
 </div>
 <div class="messages"></div>
 <div class="sendMessage removed">
@@ -51,6 +55,7 @@ export class Chat extends window.HTMLElement {
     this.closeWindow()
     this.openEmojis()
     this.addEmojis()
+    this.changeUsername()
     this.shadowRoot.querySelector('#write').focus()
   }
 
@@ -62,8 +67,8 @@ export class Chat extends window.HTMLElement {
       input.focus()
       if (event.target === this.shadowRoot.querySelector('#close')) {
         close.classList.add('removed')
+        this.socket.close()
       }
-      this.socket.close()
     })
   }
 
@@ -127,6 +132,16 @@ export class Chat extends window.HTMLElement {
         const code = event.target.innerHTML
         input.value = input.value + code
       }
+    })
+  }
+
+  changeUsername () {
+    const change = this.shadowRoot.querySelector('#tools')
+    change.addEventListener('click', event => {
+      const changeUsername = document.createElement('change-username')
+      changeUsername.setAttribute('data-changeusername', true)
+      changeUsername.style.zIndex = zIndex()
+      document.body.appendChild(changeUsername)
     })
   }
 }

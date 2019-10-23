@@ -42,25 +42,38 @@ export class ChangeUsername extends window.HTMLElement {
   }
 
   changeUsername () {
+    this.getFocused()
     const button = this.shadowRoot.querySelector('#submit')
     const input = this.shadowRoot.querySelector('#newUsername')
+    const isFromTheChatApp = this.getAttribute('data-changeusername')
+    input.setAttribute('value', window.localStorage.getItem('username'))
     input.addEventListener('click', event => {
       input.focus()
     })
     button.addEventListener('click', event => {
       window.localStorage.setItem('username', input.value)
       this.shadowRoot.querySelector('#board').classList.add('removed')
-      const chat = document.createElement('chat-board')
-      chat.style.position = 'absolute'
-      chat.style.zIndex = zIndex()
-      chat.style.top = topChat()
-      chat.style.left = leftChat()
-      chat.addEventListener('click', event => {
+      if (isFromTheChatApp !== 'true') {
+        const chat = document.createElement('chat-board')
+        chat.style.position = 'absolute'
         chat.style.zIndex = zIndex()
-      })
-      // implementing draggable functionality on the board
-      dragElement(chat)
-      document.body.appendChild(chat)
+        chat.style.top = topChat()
+        chat.style.left = leftChat()
+        chat.addEventListener('click', event => {
+          chat.style.zIndex = zIndex()
+        })
+        // implementing draggable functionality on the board
+        dragElement(chat)
+        document.body.appendChild(chat)
+      }
+    })
+  }
+
+  getFocused () {
+    const board = this.shadowRoot.querySelector('#board')
+    dragElement(board)
+    board.addEventListener('click', event => {
+      board.style.zIndex = zIndex()
     })
   }
 }
