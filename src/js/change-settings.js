@@ -24,8 +24,8 @@ Memory Game
 <label for="size-of-board4">4x4</label>
 </div>
 <div id="image">
-<input id="image1" type="radio" name="image" value="image1.png" checked>
-<label for="image1"><img src="../image/memory/image1.png" alt="leaves" /></label>
+<input id="image1" type="radio" name="image" value="soccer.png" checked>
+<label for="image1"><img id="img1" src="../image/memory/soccer.png" alt="football" /></label>
 <input id="image2" type="radio" name="image" value="statue.png">
 <label for="image2"><img src="../image/memory/statue.png" alt="statues"/></label>
 <input id="image3" type="radio" name="image" value="image3.png">
@@ -83,7 +83,7 @@ export class ChangeSettings extends window.HTMLElement {
       }
 
       if (this.shadowRoot.querySelector('#image1').checked) {
-        memGame.setAttribute('data-image', 'leaves.png')
+        memGame.setAttribute('data-image', 'football')
       } else if (this.shadowRoot.querySelector('#image2').checked) {
         memGame.setAttribute('data-image', 'monuments')
       } else if (this.shadowRoot.querySelector('#image3').checked) {

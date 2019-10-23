@@ -5,6 +5,7 @@ import { zIndex } from './desktop.js'
 const template = document.createElement('template')
 template.innerHTML = `
 <head>
+<meta charset = "utf-8">
 <link rel="stylesheet" href="../css/chat.css">
 </head>
 <div id="chat">
