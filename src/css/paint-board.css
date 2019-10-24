@@ -27,6 +27,7 @@
 #tools {
     float:left;
     width: 50px;
+    margin-right: 10px;
 }
 
 #pink {
@@ -84,4 +85,10 @@
 
 #bucketDiv {
     background-color: rgb(223, 222, 191);
+}
+
+#canvasDrawing { 
+    position: absolute;
+    width: 745px;
+    height: 515px;
 }

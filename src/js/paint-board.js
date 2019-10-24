@@ -92,8 +92,8 @@ export class PaintBoard extends window.HTMLElement {
     window.ctx.lineCap = 'round' // rounded end cap
     window.ctx.strokeStyle = window.colour // hex color of line
     window.ctx.moveTo(this.x, this.y) // from position
-    this.x = e.pageX - this.canvas.offsetLeft
-    this.y = e.pageY - this.canvas.offsetTop
+    this.x = e.pageX - this.shadowRoot.querySelector('#board').offsetLeft - this.canvas.offsetLeft
+    this.y = e.pageY - this.shadowRoot.querySelector('#board').offsetTop - this.canvas.offsetTop
     window.ctx.lineTo(this.x, this.y) // to position
     window.ctx.stroke() // draw it!
   }
@@ -106,8 +106,8 @@ export class PaintBoard extends window.HTMLElement {
 
   // new position from mouse events
   setPosition (e) {
-    this.x = e.clientX
-    this.y = e.clientY
+    this.x = e.clientX - this.shadowRoot.querySelector('#board').offsetLeft - this.canvas.offsetLeft
+    this.y = e.clientY - this.shadowRoot.querySelector('#board').offsetTop - this.canvas.offsetTop
   }
 
   changeColour () {
@@ -170,7 +170,6 @@ export class PaintBoard extends window.HTMLElement {
   changeBackground () {
     const bucket = this.shadowRoot.querySelector('#bucket')
     bucket.addEventListener('click', event => {
-      console.log(window.colour)
       window.ctx.fillStyle = window.colour + ''
       window.ctx.fillRect(0, 0, window.ctx.canvas.width, window.ctx.canvas.height)
     })
