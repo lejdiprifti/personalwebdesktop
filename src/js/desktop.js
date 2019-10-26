@@ -1,10 +1,11 @@
 import './chat.js'
+import './camera-app.js'
 import './paint-board.js'
 import './memory-game.js'
 import './change-settings.js'
 import './change-username.js'
 import { dragElement } from './drag.js'
-export { openChat, openPainting, openMemoryGame, zIndex, topMem, leftMem, topChat, leftChat }
+export { openChat, openPainting, openMemoryGame, zIndex, topMem, leftMem, topChat, leftChat, openCamera }
 // the coordinates of the windows
 let topChatNum = 0
 let leftChatNum = 0
@@ -185,4 +186,14 @@ function createChatBox () {
     leftChatNum = leftChatNum + 10
   }
   document.body.appendChild(chat)
+}
+
+function openCamera () {
+  const cameraIcon = document.querySelector('#camera')
+  cameraIcon.addEventListener('click', event => {
+    const camera = document.createElement('camera-app')
+    camera.style.zIndex = zIndex()
+    camera.style.position = 'absolute'
+    document.body.appendChild(camera)
+  })
 }

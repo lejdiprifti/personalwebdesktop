@@ -14,7 +14,8 @@ template.innerHTML = `
 <img id="close" src="../image/error.png" alt="close window" />
 </div>
 <div id="settings">
-Change Settings
+<label id="save">Save</label>
+<label id="change">Change Settings</label>
 </div>
 <div id="tools">
 <div id="red" class="colour"></div>
@@ -65,6 +66,7 @@ export class PaintBoard extends window.HTMLElement {
     this.changeColour()
     this.changeBackground()
     this.changeSettings()
+    this.saveCanvas()
   }
 
   closeWindow () {
@@ -170,7 +172,7 @@ export class PaintBoard extends window.HTMLElement {
   }
 
   changeSettings () {
-    this.shadowRoot.querySelector('#settings').addEventListener('click', event => {
+    this.shadowRoot.querySelector('#change').addEventListener('click', event => {
       const paintSett = document.createElement('paint-settings')
       this.shadowRoot.querySelector('#changeSettings').classList.remove('removed')
       paintSett.classList.add('paintSettings')
@@ -179,6 +181,18 @@ export class PaintBoard extends window.HTMLElement {
       })
       self = this
       this.shadowRoot.querySelector('#changeSettings').appendChild(paintSett)
+    })
+  }
+
+  saveCanvas () {
+    this.shadowRoot.querySelector('#save').addEventListener('click', event => {
+      if (this.canvas.msToBlob) {
+        const blob = this.canvas.msToBlob()
+        window.navigator.msSaveBlob(blob, 'canvas.png')
+      } else { // CH, FF
+        const image = this.canvas.toDataURL('image/png').replace('image/png', 'image/octet-stream')
+        window.location.href = image
+      }
     })
   }
 }
