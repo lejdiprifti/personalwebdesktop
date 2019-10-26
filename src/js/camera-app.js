@@ -35,7 +35,6 @@ export class CameraApp extends window.HTMLElement {
     this.create()
     this.takePicture()
     this.closeWindow()
-    this.focus()
     dragElement(this.shadowRoot.querySelector('#camera'))
   }
 
@@ -69,12 +68,6 @@ export class CameraApp extends window.HTMLElement {
       this.cameraImage.src = this.cameraCanvas.toDataURL('image/webp')
       this.cameraImage.classList.add('taken')
       this.cameraImage.style.zIndex = zIndex()
-    })
-  }
-
-  focus () {
-    this.shadowRoot.querySelector('#camera').addEventListener('click', event => {
-      this.shadowRoot.querySelector('#camera').style.zIndex = zIndex()
     })
   }
 }

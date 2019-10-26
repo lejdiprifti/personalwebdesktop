@@ -194,6 +194,9 @@ function openCamera () {
   cameraIcon.addEventListener('click', event => {
     const camera = document.createElement('camera-app')
     camera.style.zIndex = zIndex()
+    camera.addEventListener('click', event => {
+      camera.style.zIndex = zIndex()
+    })
     camera.style.position = 'absolute'
     if (topCam < 60) {
       camera.style.top = topCam + 'px'
