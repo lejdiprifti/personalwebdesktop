@@ -3,7 +3,8 @@
     filter: FlipH;
 }
 
-#camera, #cameraVideo, #cameraCanvas, #cameraOutput{
+#camera, #cameraVideo, #cameraCanvas, #cameraImage{
+    background-color: azure;
     position: absolute;
     height: 500px;
     width: 500px;
@@ -20,7 +21,7 @@
     text-align: center;
     box-shadow: 0 5px 10px 0 rgba(0,0,0,0.2);
     position: absolute;
-    bottom: 10px;
+    bottom: 0px;
     left: calc(50% - 100px);
 }
 

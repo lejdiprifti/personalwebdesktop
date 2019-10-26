@@ -7,7 +7,8 @@ template.innerHTML = `
 </head>
 <div id="camera">
 <div class="navbar">
-<img id="pic" src="../image/tools.png" alt="paint" />
+<img id="pic" src="../image/photo-camera.png" alt="camera" />
+Camera
 <img id="close" src="../image/error.png" alt="close window" />
 </div>
 <canvas id="cameraCanvas"></canvas>
@@ -51,6 +52,7 @@ export class CameraApp extends window.HTMLElement {
     navigator.mediaDevices.getUserMedia(this.details)
       .then(function (stream) {
         const track = stream.getTracks()[0]
+        console.log(track)
         self.cameraVideo.srcObject = stream
       })
       .catch(function (error) {
