@@ -1,13 +1,20 @@
 import { dragElement } from './drag.js'
+import './paint-settings.js'
+import { zIndex } from './desktop.js'
+export { isFinished, setWidth, setCap }
 const template = document.createElement('template')
 template.innerHTML = `
 <head>
 <link rel="stylesheet" href="../css/paint-board.css">
 </head>
+<div>
 <div id="board">
 <div class="navbar">
 <img id="pic" src="../image/tools.png" alt="paint" />
 <img id="close" src="../image/error.png" alt="close window" />
+</div>
+<div id="settings">
+Change Settings
 </div>
 <div id="tools">
 <div id="red" class="colour"></div>
@@ -18,9 +25,6 @@ template.innerHTML = `
 <div id="purple" class="colour"></div>
 <div id="green" class="colour"></div>
 <div id="yellow" class="colour"></div>
-<div id="input" class="colour">
-<input id="brushValue" type="text" placeholder="width" />
-</div>
 <div id="bucketDiv" class="colour">
 <img id="bucket" src="../image/paint-bucket.png" alt="bucket" />
 </div>
@@ -38,7 +42,11 @@ offline tool.</p>
 </canvas>
 </div>
 </div>
+<div id="changeSettings" class="removed">
+</div>
+</div>
 `
+let self
 export class PaintBoard extends window.HTMLElement {
   constructor () {
     super()
@@ -46,17 +54,17 @@ export class PaintBoard extends window.HTMLElement {
     this.shadowRoot.appendChild(template.content.cloneNode(true))
     this.x = 0
     this.y = 0
-    window.colour = 'black'
+    this.colour = 'black'
     this.canvas = this.shadowRoot.querySelector('#canvasDrawing')
-    window.ctx = this.canvas.getContext('2d')
+    this.ctx = this.canvas.getContext('2d')
   }
 
   connectedCallback () {
     this.initialize()
     this.closeWindow()
     this.changeColour()
-    this.changeLineWidth()
     this.changeBackground()
+    this.changeSettings()
   }
 
   closeWindow () {
@@ -80,7 +88,7 @@ export class PaintBoard extends window.HTMLElement {
       event.stopImmediatePropagation()
       this.setPosition(event)
     })
-    paintingBoard.addEventListener('mouseenter', event => {
+    paintingBoard.addEventListener('click', event => {
       this.setPosition(event)
     })
     dragElement(this.shadowRoot.querySelector('#board'))
@@ -88,20 +96,21 @@ export class PaintBoard extends window.HTMLElement {
 
   draw (e) {
     if (e.buttons !== 1) return // if mouse is pressed.....
-    window.ctx.beginPath() // begin the drawing path
-    window.ctx.lineCap = 'round' // rounded end cap
-    window.ctx.strokeStyle = window.colour // hex color of line
-    window.ctx.moveTo(this.x, this.y) // from position
+    this.ctx.beginPath() // begin the drawing path
+    this.ctx.lineCap = this.getAttribute('data-cap') // cap
+    this.ctx.strokeStyle = this.colour // color of line
+    this.ctx.lineWidth = this.getAttribute('data-width')
+    this.ctx.moveTo(this.x, this.y) // from position
     this.x = e.pageX - this.shadowRoot.querySelector('#board').offsetLeft - this.canvas.offsetLeft
     this.y = e.pageY - this.shadowRoot.querySelector('#board').offsetTop - this.canvas.offsetTop
-    window.ctx.lineTo(this.x, this.y) // to position
-    window.ctx.stroke() // draw it!
+    this.ctx.lineTo(this.x, this.y) // to position
+    this.ctx.stroke() // draw it!
   }
 
   // size canvas
   size () {
-    window.ctx.canvas.width = 750
-    window.ctx.canvas.height = 510
+    this.ctx.canvas.width = 750
+    this.ctx.canvas.height = 510
   }
 
   // new position from mouse events
@@ -113,67 +122,77 @@ export class PaintBoard extends window.HTMLElement {
   changeColour () {
     this.shadowRoot.querySelector('#red').addEventListener('click', event => {
       event.stopImmediatePropagation()
-      window.colour = 'red'
+      this.colour = 'red'
     })
 
     this.shadowRoot.querySelector('#pink').addEventListener('click', event => {
       event.stopImmediatePropagation()
-      window.colour = 'pink'
+      this.colour = 'pink'
     })
 
     this.shadowRoot.querySelector('#black').addEventListener('click', event => {
       event.stopImmediatePropagation()
-      window.colour = 'black'
+      this.colour = 'black'
     })
 
     this.shadowRoot.querySelector('#yellow').addEventListener('click', event => {
       event.stopImmediatePropagation()
-      window.colour = 'yellow'
+      this.colour = 'yellow'
     })
 
     this.shadowRoot.querySelector('#purple').addEventListener('click', event => {
       event.stopImmediatePropagation()
-      window.colour = 'purple'
+      this.colour = 'purple'
     })
 
     this.shadowRoot.querySelector('#cyan').addEventListener('click', event => {
       event.stopImmediatePropagation()
-      window.colour = 'cyan'
+      this.colour = 'cyan'
     })
 
     this.shadowRoot.querySelector('#green').addEventListener('click', event => {
       event.stopImmediatePropagation()
-      window.colour = 'green'
+      this.colour = 'green'
     })
 
     this.shadowRoot.querySelector('#blue').addEventListener('click', event => {
       event.stopImmediatePropagation()
-      window.colour = 'blue'
-    })
-  }
-
-  /**
-  * whenever the value changes, the lineWidth will be updated
-  * whenever the user clicks on the input field, it will get focus.
-  */
-  changeLineWidth () {
-    const font = this.shadowRoot.querySelector('#brushValue')
-    font.focus()
-    font.addEventListener('change', event => {
-      window.ctx.lineWidth = font.value
-    })
-    font.addEventListener('click', event => {
-      font.focus()
+      this.colour = 'blue'
     })
   }
 
   changeBackground () {
     const bucket = this.shadowRoot.querySelector('#bucket')
     bucket.addEventListener('click', event => {
-      window.ctx.fillStyle = window.colour + ''
-      window.ctx.fillRect(0, 0, window.ctx.canvas.width, window.ctx.canvas.height)
+      this.ctx.fillStyle = this.colour + ''
+      this.ctx.fillRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height)
     })
   }
+
+  changeSettings () {
+    this.shadowRoot.querySelector('#settings').addEventListener('click', event => {
+      const paintSett = document.createElement('paint-settings')
+      this.shadowRoot.querySelector('#changeSettings').classList.remove('removed')
+      paintSett.classList.add('paintSettings')
+      paintSett.addEventListener('click', event => {
+        paintSett.style.zIndex = zIndex()
+      })
+      self = this
+      this.shadowRoot.querySelector('#changeSettings').appendChild(paintSett)
+    })
+  }
+}
+
+function isFinished () {
+  self.shadowRoot.querySelector('#changeSettings').classList.add('removed')
+}
+
+function setWidth (num) {
+  self.setAttribute('data-width', num)
+}
+
+function setCap (cap) {
+  self.setAttribute('data-cap', cap)
 }
 
 window.customElements.define('paint-board', PaintBoard)

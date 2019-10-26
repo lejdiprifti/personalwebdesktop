@@ -24,6 +24,10 @@
 .removed {
     display: none;
 }
+#settings {
+    height: 20px;
+    background-color: #444;
+}
 #tools {
     float:left;
     width: 50px;
@@ -91,4 +95,13 @@
     position: absolute;
     width: 745px;
     height: 515px;
+}
+
+#changeSettings {
+    cursor: pointer;
+}
+.paintSettings {
+    position: absolute;
+    margin-top: 200px;
+    margin-left: 200px;
 }
