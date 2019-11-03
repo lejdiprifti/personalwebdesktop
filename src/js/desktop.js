@@ -19,10 +19,10 @@ function openChat () {
   const chatIcon = document.querySelector('#chat')
   // create a chat board element for every click
   chatIcon.addEventListener('click', event => {
-    if (window.localStorage.getItem('username').length > 0) {
-      createChatBox()
-    } else {
+    if (window.localStorage.getItem('username') === null) {
       createUsernameBox()
+    } else {
+      createChatBox()
     }
   })
 }

@@ -1,7 +1,8 @@
 #chat {
     position: absolute;
     border: 1px solid cadetblue;
-    background-color: #444;
+    background-image: url("../image/chat/background.jpg");
+    background-size: cover;
     width: 400px;
     height: 430px;
 }
@@ -16,7 +17,13 @@
     width: 16px;
 }
 .senderMessage, .recieverMessage {
-    width: 350px;
+    width: 90%;
+    overflow-x: auto;
+    background-color: rgb(206, 253, 200);
+    margin-left: 5px;
+    border-radius: 5px;
+    padding: 5px;
+
 }
 
 .navbar {
@@ -57,8 +64,8 @@
 }
 
 #emojis {
-    background-color: rgb(126, 111, 111);
-    border: 2px solid black;
+    background-color: rgb(204, 219, 210);
+    border: 2px solid rgb(131, 131, 127);
     position: absolute;
     right: 20px;
     bottom: 75px;
@@ -71,9 +78,21 @@
 }
 
 #tools {
-    height: 10px;
+    height: 20px;
     width: 400px;
-    background-color: #444;
-    float:right;
+    background-color: rgb(241, 241, 241);
+    text-align: center;
     cursor: pointer;
+}
+
+#tools:hover {
+    background-color: rgb(226, 223, 223);
+}
+
+#header {
+    width: 25%;
+    text-align: center;
+    background-color: rgb(46, 109, 38);
+    border-radius: 50px;
+    padding: 3px;
 }

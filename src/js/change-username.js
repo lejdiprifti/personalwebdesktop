@@ -13,7 +13,7 @@ Chat
 <img id="close" src="../image/error.png" alt="close window" />
 </div>
 <div id="change">
-<h4>Pick a username</h4>
+<p>Pick a username</p>
 <input type="text" id="newUsername" />
 <input type="button" id="submit" value="Save"/>
 </div>
@@ -46,7 +46,7 @@ export class ChangeUsername extends window.HTMLElement {
     const button = this.shadowRoot.querySelector('#submit')
     const input = this.shadowRoot.querySelector('#newUsername')
     const isFromTheChatApp = this.getAttribute('data-changeusername')
-    input.setAttribute('value', window.localStorage.getItem('username'))
+    input.setAttribute('value', window.localStorage.getItem('username') || 'Unknown')
     input.addEventListener('click', event => {
       input.focus()
     })

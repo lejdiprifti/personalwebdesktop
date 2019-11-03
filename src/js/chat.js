@@ -97,21 +97,29 @@ export class Chat extends window.HTMLElement {
     }
     // show the sender message
     this.socket.send(JSON.stringify(data))
+    const headerMsg = document.createElement('p')
+    headerMsg.setAttribute('class', 'senderMessage')
+    headerMsg.setAttribute('id', 'header')
+    headerMsg.innerHTML = data.username
     const sentMsg = document.createElement('p')
     sentMsg.setAttribute('class', 'senderMessage')
-    sentMsg.innerHTML = data.username + ' : ' + data.data
+    sentMsg.innerHTML = data.data
+    this.shadowRoot.querySelector('.messages').appendChild(headerMsg)
     this.shadowRoot.querySelector('.messages').appendChild(sentMsg)
   }
 
   updateChat (msg) {
     // check if the reciever message is from the same user that sent it
     const message = JSON.parse(msg.data)
-    console.log(message)
     if (message.username !== window.localStorage.getItem('username') && message.username !== 'The Server') {
-      console.log('message arrived')
       const recieverMessage = document.createElement('p')
+      const headerMsg = document.createElement('p')
+      headerMsg.setAttribute('class', 'senderMessage')
+      headerMsg.setAttribute('id', 'header')
+      headerMsg.innerHTML = message.username
       recieverMessage.setAttribute('class', 'recieverMessage')
-      recieverMessage.innerHTML = message.username + ' : ' + message.data
+      recieverMessage.innerHTML = message.data
+      this.shadowRoot.querySelector('.messages').appendChild(headerMsg)
       this.shadowRoot.querySelector('.messages').appendChild(recieverMessage)
     }
   }
@@ -141,7 +149,8 @@ export class Chat extends window.HTMLElement {
     change.addEventListener('click', event => {
       const changeUsername = document.createElement('change-username')
       changeUsername.setAttribute('data-changeusername', true)
-      changeUsername.style.zIndex = zIndex()
+      changeUsername.style.position = 'absolute'
+      changeUsername.style.zIndex = zIndex() + 2
       document.body.appendChild(changeUsername)
     })
   }
