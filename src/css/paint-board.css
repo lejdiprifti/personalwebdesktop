@@ -2,8 +2,8 @@
     position: absolute;
     border: 1px solid cadetblue;
     background-color: white;
-    width: 800px;
-    height: 540px;
+    width: 805px;
+    height: 560px;
 }
 
 #close {
@@ -27,6 +27,12 @@
 #settings {
     height: 20px;
     background-color: rgb(241, 241, 241);
+    text-align: center;
+}
+
+#settings:hover {
+    cursor: pointer;
+    background-color: rgb(226, 223, 223);
 }
 #tools {
     float:left;
@@ -76,11 +82,27 @@
     width: 55px;
 }
 
-#bucketDiv {
+#bucketDiv:hover {
     background-color: rgb(223, 222, 191);
 }
-
 #eraserDiv {
+    margin-top: 10px;
+}
+#eraser {
+    padding: 10px;
+}
+
+#eraser:hover {
+    -webkit-animation:spin 4s linear infinite;
+    -moz-animation:spin 4s linear infinite;
+    animation:spin 4s linear infinite;
+}
+
+@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
+
+#eraserDiv:hover {
     background-color: rgb(223, 222, 191);
 }
 

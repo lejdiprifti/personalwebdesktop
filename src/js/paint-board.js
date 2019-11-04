@@ -11,11 +11,11 @@ template.innerHTML = `
 <div id="board">
 <div class="navbar">
 <img id="pic" src="../image/tools.png" alt="paint" />
+PicsArt
 <img id="close" src="../image/error.png" alt="close window" />
 </div>
 <div id="settings">
-<label id="save">Save</label>
-<label id="change">Change Settings</label>
+Change Settings
 </div>
 <div id="tools">
 <div id="red" class="colour"></div>
@@ -180,7 +180,7 @@ export class PaintBoard extends window.HTMLElement {
   }
 
   changeSettings () {
-    this.shadowRoot.querySelector('#change').addEventListener('click', event => {
+    this.shadowRoot.querySelector('#settings').addEventListener('click', event => {
       const paintSett = document.createElement('paint-settings')
       this.shadowRoot.querySelector('#changeSettings').classList.remove('removed')
       paintSett.classList.add('paintSettings')
@@ -192,17 +192,17 @@ export class PaintBoard extends window.HTMLElement {
     })
   }
 
-  saveCanvas () {
-    this.shadowRoot.querySelector('#save').addEventListener('click', event => {
-      if (this.canvas.msToBlob) {
-        const blob = this.canvas.msToBlob()
-        window.navigator.msSaveBlob(blob, 'canvas.png')
-      } else { // CH, FF
-        const image = this.canvas.toDataURL('image/png').replace('image/png', 'image/octet-stream')
-        window.location.href = image
-      }
-    })
-  }
+  // saveCanvas () {
+  //   this.shadowRoot.querySelector('#save').addEventListener('click', event => {
+  //     if (this.canvas.msToBlob) {
+  //       const blob = this.canvas.msToBlob()
+  //       window.navigator.msSaveBlob(blob, 'canvas.png')
+  //     } else { // CH, FF
+  //       const image = this.canvas.toDataURL('image/png').replace('image/png', 'image/octet-stream')
+  //       window.location.href = image
+  //     }
+  //   })
+  // }
 }
 
 function isFinished () {
