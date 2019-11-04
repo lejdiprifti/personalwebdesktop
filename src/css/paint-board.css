@@ -26,7 +26,7 @@
 }
 #settings {
     height: 20px;
-    background-color: #444;
+    background-color: rgb(241, 241, 241);
 }
 #tools {
     float:left;
@@ -72,23 +72,21 @@
     height: 50px;
 }
 
-#brushValue {
-    margin-top: 15px;
-    width: 54px;
-}
-
-#input {
-    border: 1px solid #444;
-    background-image: url("../image/parallel.png");
-    background-color: rgb(223, 222, 191);
-    height: 60px;
-}
 #bucket {
     width: 55px;
 }
 
 #bucketDiv {
     background-color: rgb(223, 222, 191);
+}
+
+#eraserDiv {
+    background-color: rgb(223, 222, 191);
+}
+
+#eraser {
+    padding-right: 2px;
+    padding-top: 2px;
 }
 
 #canvasDrawing { 
