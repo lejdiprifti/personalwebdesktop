@@ -76,7 +76,7 @@ export function createChatBox () {
     chat.style.left = leftChatNum + 'px'
     topChatNum = topChatNum + 10
     leftChatNum = leftChatNum + 10
-  } else if (leftChatNum < 730) {
+  } else if (leftChatNum < 830) {
     topChatNum = 0
     chat.style.top = topChatNum + 'px'
     chat.style.left = leftChatNum + 'px'

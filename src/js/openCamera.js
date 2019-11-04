@@ -16,7 +16,7 @@ export function openCamera () {
       camera.style.left = leftCam + 'px'
       topCam = topCam + 10
       leftCam = leftCam + 10
-    } else if (leftCam < 500) {
+    } else if (leftCam < 800) {
       topCam = 0
       camera.style.top = topCam + 'px'
       camera.style.left = leftCam + 'px'

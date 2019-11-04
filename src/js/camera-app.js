@@ -47,6 +47,7 @@ export class CameraApp extends window.HTMLElement {
     })
   }
 
+  // capture the camera to take photo
   create () {
     navigator.mediaDevices.getUserMedia(this.details)
       .then(function (stream) {

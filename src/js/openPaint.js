@@ -12,7 +12,7 @@ export function openPainting () {
     paint.addEventListener('click', event => {
       paint.style.zIndex = zIndex()
     })
-    if (topPaint < 60) {
+    if (topPaint < 30) {
       paint.style.top = topPaint + 'px'
       paint.style.left = leftPaint + 'px'
       paint.setAttribute('data-top', topPaint)

@@ -40,11 +40,11 @@ export function openMemoryGame () {
 }
 
 export function topMem () {
-  topMemNum = topMemNum + 1
+  topMemNum = topMemNum + 10
   return topMemNum
 }
 
 export function leftMem () {
-  leftMemNum = leftMemNum + 1
+  leftMemNum = leftMemNum + 10
   return leftMemNum
 }
