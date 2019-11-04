@@ -80,7 +80,8 @@ export class Chat extends window.HTMLElement {
     // get focus when clicked
     input.addEventListener('keydown', event => {
       input.focus()
-      if (input.value.length > 0 && event.keyCode === 13) {
+      const message = input.value.trim()
+      if (message.length > 0 && event.keyCode === 13) {
         this.sendMessage(input.value)
         input.value = ''
       }

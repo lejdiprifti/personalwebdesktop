@@ -2,12 +2,13 @@ body, html {
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-image: url("../image/sky.jpg");
+    background-image: url("../image/background.jpg");
+    background-size: cover;
 }
 
 .icons {
     cursor: pointer;
-    width: 64px;
+    width: 44px;
     margin: 2px;
      transition: 0.5s;
 }
@@ -26,9 +27,13 @@ footer {
     background-color: #444;
     border: 2px solid black;
     width: 100%;
-    height: 75px;
+    height: 50px;
     opacity: 0.6;
     position: fixed;
     bottom: 0px;
     left: 0px;
+}
+
+#cover:hover {
+    opacity: 0.2;
 }
