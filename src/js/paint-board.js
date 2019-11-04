@@ -69,7 +69,6 @@ export class PaintBoard extends window.HTMLElement {
     this.changeColour()
     this.changeBackground()
     this.changeSettings()
-    this.saveCanvas()
   }
 
   closeWindow () {
@@ -107,8 +106,8 @@ export class PaintBoard extends window.HTMLElement {
     this.ctx.strokeStyle = this.colour // color of line
     this.ctx.lineWidth = this.getAttribute('data-width')
     this.ctx.moveTo(this.x, this.y) // from position
-    this.x = e.pageX - this.shadowRoot.querySelector('#board').offsetLeft - this.canvas.offsetLeft
-    this.y = e.pageY - this.shadowRoot.querySelector('#board').offsetTop - this.canvas.offsetTop
+    this.x = e.pageX - this.offsetLeft - this.shadowRoot.querySelector('#board').offsetLeft - this.canvas.offsetLeft
+    this.y = e.pageY - this.offsetTop - this.shadowRoot.querySelector('#board').offsetTop - this.canvas.offsetTop
     this.ctx.lineTo(this.x, this.y) // to position
     this.ctx.stroke() // draw it!
   }
@@ -121,8 +120,8 @@ export class PaintBoard extends window.HTMLElement {
 
   // new position from mouse events
   setPosition (e) {
-    this.x = e.clientX - this.shadowRoot.querySelector('#board').offsetLeft - this.canvas.offsetLeft
-    this.y = e.clientY - this.shadowRoot.querySelector('#board').offsetTop - this.canvas.offsetTop
+    this.x = e.clientX - this.offsetLeft - this.shadowRoot.querySelector('#board').offsetLeft - this.canvas.offsetLeft
+    this.y = e.clientY - this.offsetTop - this.shadowRoot.querySelector('#board').offsetTop - this.canvas.offsetTop
   }
 
   changeColour () {
@@ -192,18 +191,6 @@ export class PaintBoard extends window.HTMLElement {
       this.shadowRoot.querySelector('#changeSettings').appendChild(paintSett)
     })
   }
-
-  // saveCanvas () {
-  //   this.shadowRoot.querySelector('#save').addEventListener('click', event => {
-  //     if (this.canvas.msToBlob) {
-  //       const blob = this.canvas.msToBlob()
-  //       window.navigator.msSaveBlob(blob, 'canvas.png')
-  //     } else { // CH, FF
-  //       const image = this.canvas.toDataURL('image/png').replace('image/png', 'image/octet-stream')
-  //       window.location.href = image
-  //     }
-  //   })
-  // }
 }
 
 function isFinished () {
