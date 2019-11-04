@@ -7,6 +7,7 @@ template.innerHTML = `
 <div id="board">
 <div class="navbar">
 <img id="pic" src="../image/tools.png" alt="paint" />
+Settings
 <img id="close" src="../image/error.png" alt="close window" />
 </div>
 <div id="lineWidth">
@@ -24,7 +25,7 @@ template.innerHTML = `
 <option class="capSelected"></option>
 </template>
 </select>
-<input type="submit" />
+<input id="submit" type="submit" value="Save" />
 </div>
 `
 export class PaintSettings extends window.HTMLElement {

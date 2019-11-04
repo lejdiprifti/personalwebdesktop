@@ -77,6 +77,7 @@ export class PaintBoard extends window.HTMLElement {
     close.addEventListener('click', event => {
       if (event.target === this.shadowRoot.querySelector('#close')) {
         close.classList.add('removed')
+        this.shadowRoot.querySelector('.paintSettings').classList.add('removed')
       }
     })
   }

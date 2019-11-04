@@ -1,5 +1,6 @@
 #board {
-    background-color: #444;
+    background-image: url("../image/art.jpg");
+    background-size: cover;
     position: absolute;
     border: 1px solid cadetblue;
     width: 300px;
@@ -24,4 +25,39 @@
 }
 .removed {
     display: none;
+}
+
+#lineWidth {
+    text-align: center;
+    color: white;
+    margin-top: 50px;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+#capType {
+    text-align: center;
+    color: white;
+    margin-top: 10px;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+#submit {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    border-radius: 10px;
+    background-color: rgb(115, 224, 115);
+    padding: 5px 15px;
+    cursor: pointer;
+}
+
+#submit:hover {
+    background-color: rgb(83, 202, 83);
+}
+
+select {
+    border-radius: 10px;
+    padding: 5px;
 }
