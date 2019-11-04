@@ -82,6 +82,7 @@ export class Chat extends window.HTMLElement {
       input.focus()
       const message = input.value.trim()
       if (message.length > 0 && event.keyCode === 13) {
+        event.preventDefault()
         this.sendMessage(input.value)
         input.value = ''
       }
