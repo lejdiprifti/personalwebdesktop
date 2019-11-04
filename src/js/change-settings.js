@@ -1,5 +1,6 @@
 import './memory-game.js'
-import { zIndex, topMem, leftMem } from './desktop.js'
+import { topMem, leftMem } from './openMemoryGame.js'
+import { zIndex } from './desktop.js'
 import { dragElement } from './drag.js'
 const template = document.createElement('template')
 template.innerHTML = `

@@ -1,5 +1,6 @@
 import './chat.js'
-import { zIndex, topChat, leftChat } from './desktop.js'
+import { topChat, leftChat } from './openChat.js'
+import { zIndex } from './desktop.js'
 import { dragElement } from './drag.js'
 const template = document.createElement('template')
 template.innerHTML = `
