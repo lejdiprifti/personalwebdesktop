@@ -29,6 +29,9 @@ template.innerHTML = `
 <div id="bucketDiv" class="colour">
 <img id="bucket" src="../image/paint-bucket.png" alt="bucket" />
 </div>
+<div id="eraserDiv" class="colour">
+<img id="eraser" src="../image/eraser.png" alt="eraser" />
+</div>
 </div>
 <div id="paint">
 <canvas id="canvasDrawing">
@@ -160,6 +163,11 @@ export class PaintBoard extends window.HTMLElement {
     this.shadowRoot.querySelector('#blue').addEventListener('click', event => {
       event.stopImmediatePropagation()
       this.colour = 'blue'
+    })
+
+    this.shadowRoot.querySelector('#eraser').addEventListener('click', event => {
+      event.stopImmediatePropagation()
+      this.colour = 'white'
     })
   }
 
