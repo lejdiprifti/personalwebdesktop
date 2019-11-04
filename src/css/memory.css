@@ -1,7 +1,7 @@
 #board {
     position: absolute;
     border: 1px solid cadetblue;
-    background-color: white;
+    background-color: rgb(218, 231, 183);
     width: 600px;
     height: 400px;
 }
@@ -35,7 +35,7 @@
 
 #data {
     float: right;
-    background-color: #444;
+    background-color: rgb(79, 146, 233);
     height: 100px;
     width: 200px;
     margin-top: 50px;
@@ -43,21 +43,23 @@
 }
 
 #timer {
-    background-color: rgb(94, 93, 93);
+    background-color: rgb(12, 43, 109);
     width: 140px;
     text-align: center;
     height: 25px;
     margin-left: 30px;
-    margin-top: 15px;
+    margin-top: 10px;
+    padding: 2px;
 }
 
 #clicks {
-    background-color: rgb(94, 93, 93);
+    background-color: rgb(12, 43, 109);
     width: 140px;
     text-align: center;
-    height: 30px;
+    height: 25px;
     margin-left: 30px;
     margin-top: 20px;
+    padding: 2px;
 }
 
 #container {

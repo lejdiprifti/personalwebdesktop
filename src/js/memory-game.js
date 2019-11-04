@@ -70,7 +70,7 @@ export class MemoryGame extends window.HTMLElement {
     // display the number of attempts the user does
     const attemptsDiv = this.shadowRoot.querySelector('#clicks')
     let attempts = 0
-
+    let tries = 0
     picArray.forEach(function (tab, index) {
       img = document.importNode(memoryTemplate.firstElementChild, true)
       img.firstElementChild.src = '../image/memory/' + dataImage + '/0.png'
@@ -99,9 +99,10 @@ export class MemoryGame extends window.HTMLElement {
           return
         }
         guess2 = targetImg
+        tries = tries + 1
+        attemptsDiv.innerHTML = 'Number of clicks: ' + tries
         if (guess1.src === guess2.src) {
           attempts = attempts + 1
-          attemptsDiv.innerHTML = 'Number of clicks: ' + attempts
           //  check if the game is won
           if (attempts === (cols * rows) / 2) {
             this.checkWin(this.timer)
