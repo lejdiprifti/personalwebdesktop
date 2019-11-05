@@ -16,12 +16,12 @@ export function openMemoryGame () {
       changeSettings.style.zIndex = zIndex()
     })
     changeSettings.style.position = 'absolute'
-    if (topSett < 60) {
+    if (topSett < 350) {
       changeSettings.style.top = topSett + 'px'
       changeSettings.style.left = leftSett + 'px'
       topSett = topSett + 10
       leftSett = leftSett + 10
-    } else if (leftSett < 500) {
+    } else if (leftSett < 1000) {
       topSett = 0
       changeSettings.style.top = topSett + 'px'
       changeSettings.style.left = leftSett + 'px'
