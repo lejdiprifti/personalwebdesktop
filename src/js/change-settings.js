@@ -65,7 +65,6 @@ export class ChangeSettings extends window.HTMLElement {
       memGame.style.zIndex = zIndex()
       memGame.style.top = topMem() + 'px'
       memGame.style.left = leftMem() + 'px'
-      console.log(memGame.style.top, memGame.style.left)
       dragElement(memGame)
       memGame.addEventListener('click', event => {
         memGame.style.zIndex = zIndex()

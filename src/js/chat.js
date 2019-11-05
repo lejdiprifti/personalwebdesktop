@@ -113,7 +113,7 @@ export class Chat extends window.HTMLElement {
   updateChat (msg) {
     // check if the reciever message is from the same user that sent it
     const message = JSON.parse(msg.data)
-    if (message.username !== window.localStorage.getItem('username') && message.username !== 'The Server') {
+    if (message.username !== window.localStorage.getItem('username') && message.type !== 'heartbeat') {
       const recieverMessage = document.createElement('p')
       const headerMsg = document.createElement('p')
       headerMsg.setAttribute('class', 'senderMessage')
@@ -152,6 +152,8 @@ export class Chat extends window.HTMLElement {
       const changeUsername = document.createElement('change-username')
       changeUsername.setAttribute('data-changeusername', true)
       changeUsername.style.position = 'absolute'
+      changeUsername.style.top = this.offsetTop + 60 + 'px'
+      changeUsername.style.left = this.offsetLeft + 50 + 'px'
       changeUsername.style.zIndex = zIndex() + 2
       document.body.appendChild(changeUsername)
     })
