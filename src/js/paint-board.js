@@ -124,47 +124,12 @@ export class PaintBoard extends window.HTMLElement {
     this.y = e.clientY - this.offsetTop - this.shadowRoot.querySelector('#board').offsetTop - this.canvas.offsetTop
   }
 
+  // everytime the tools is clicked on a colo, the color attribute will store the chosen color
   changeColour () {
-    this.shadowRoot.querySelector('#red').addEventListener('click', event => {
+    this.shadowRoot.querySelector('#tools').addEventListener('click', event => {
       event.stopImmediatePropagation()
-      this.colour = 'red'
+      this.colour = event.target.getAttribute('id')
     })
-
-    this.shadowRoot.querySelector('#pink').addEventListener('click', event => {
-      event.stopImmediatePropagation()
-      this.colour = 'pink'
-    })
-
-    this.shadowRoot.querySelector('#black').addEventListener('click', event => {
-      event.stopImmediatePropagation()
-      this.colour = 'black'
-    })
-
-    this.shadowRoot.querySelector('#yellow').addEventListener('click', event => {
-      event.stopImmediatePropagation()
-      this.colour = 'yellow'
-    })
-
-    this.shadowRoot.querySelector('#purple').addEventListener('click', event => {
-      event.stopImmediatePropagation()
-      this.colour = 'purple'
-    })
-
-    this.shadowRoot.querySelector('#cyan').addEventListener('click', event => {
-      event.stopImmediatePropagation()
-      this.colour = 'cyan'
-    })
-
-    this.shadowRoot.querySelector('#green').addEventListener('click', event => {
-      event.stopImmediatePropagation()
-      this.colour = 'green'
-    })
-
-    this.shadowRoot.querySelector('#blue').addEventListener('click', event => {
-      event.stopImmediatePropagation()
-      this.colour = 'blue'
-    })
-
     this.shadowRoot.querySelector('#eraser').addEventListener('click', event => {
       event.stopImmediatePropagation()
       this.colour = 'white'

@@ -84,7 +84,7 @@ export class MemoryGame extends window.HTMLElement {
     /**
      * when the div is clicked, I capture the target of the div and flip the tabs when clicked
      */
-    div.addEventListener('click', event => {
+    div.addEventListener('keypress', event => {
       event.preventDefault()
       const targetImg = event.target.nodeName === 'IMG' ? event.target : event.target.firstElementChild
       // if guess2 contains data, you shall not be able to click another tab
