@@ -65,10 +65,6 @@ export function createChatBox () {
   const chat = document.createElement('chat-board')
   chat.style.position = 'absolute'
   chat.style.zIndex = zIndex()
-  triggerEvent({
-    username: window.localStorage.getItem('username'),
-    app: 'Chat'
-  })
   chat.addEventListener('click', event => {
     chat.style.zIndex = zIndex()
   })
@@ -95,17 +91,4 @@ export function createChatBox () {
     leftChatNum = leftChatNum + 10
   }
   document.body.appendChild(chat)
-}
-
-export async function triggerEvent (obj) {
-  let answer = await fetch('http://localhost:8080/testing/message', {
-    method: 'POST',
-    credentials: 'same-origin',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(obj)
-  })
-  answer = await answer.json()
-  console.log(answer)
 }
