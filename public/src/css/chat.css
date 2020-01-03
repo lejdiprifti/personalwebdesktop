@@ -1,0 +1,98 @@
+#chat {
+    position: absolute;
+    border: 1px solid cadetblue;
+    background-image: url("../image/chat/background.jpg");
+    background-size: cover;
+    width: 400px;
+    height: 435px;
+}
+#close {
+    cursor: pointer;
+    float:right;
+    margin: 2px;
+}
+#pic {
+    float:left;
+    margin: 2px;
+    width: 16px;
+}
+.senderMessage, .recieverMessage {
+    width: 90%;
+    overflow-x: auto;
+    background-color: rgb(206, 253, 200);
+    margin-left: 5px;
+    border-radius: 5px;
+    padding: 5px;
+
+}
+
+.navbar {
+    cursor: move;
+    background-color: rgb(247, 245, 245);
+    height: 20px;
+}
+
+.removed {
+    display: none;
+}
+
+.messages {
+    width: 400px;
+    height: 320px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.login {
+    margin-left: 150px;
+    margin-top: 150px;
+}
+
+#write {
+    height: 65px;
+    width: 355px;
+    resize: none;
+}
+
+.sendMessage {
+    width: 400px;
+}
+
+#smiley {
+    float:right;
+    width: 35px;
+}
+
+#emojis {
+    background-color: rgb(204, 219, 210);
+    border: 2px solid rgb(131, 131, 127);
+    position: absolute;
+    right: 20px;
+    bottom: 75px;
+    width: 110px;
+}
+
+#emojis p {
+    cursor: pointer;
+    float: right;
+}
+
+#tools {
+    height: 20px;
+    width: 400px;
+    background-color: rgb(241, 241, 241);
+    text-align: center;
+    cursor: pointer;
+}
+
+#tools:hover {
+    background-color: rgb(226, 223, 223);
+}
+
+#header {
+    width: 25%;
+    text-align: center;
+    background-color: rgb(46, 109, 38);
+    border-radius: 50px;
+    padding: 3px;
+}

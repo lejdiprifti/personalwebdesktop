@@ -1,0 +1,62 @@
+#cameraVideo, #cameraCanvas, #cameraImage {
+    transform: scaleX(-1);
+    filter: FlipH;
+}
+
+#camera, #cameraVideo, #cameraCanvas, #cameraImage{
+    background-color: azure;
+    position: absolute;
+    height: 500px;
+    width: 500px;
+}
+
+#cameraButton {
+    width: 200px;
+    background-color: rgb(148, 138, 138);
+    color: white;
+    font-size: 16px;
+    border-radius: 30px;
+    border: none;
+    padding: 15px 20px;
+    text-align: center;
+    box-shadow: 0 5px 10px 0 rgba(0,0,0,0.2);
+    position: absolute;
+    bottom: 0px;
+    left: calc(50% - 100px);
+}
+
+#cameraButton:hover {
+    background-color: rgb(87, 84, 84);
+    cursor: pointer;
+}
+
+.taken{
+    height: 100px!important;
+    width: 100px!important;
+    transition: all 0.5s ease-in;
+    border: solid 3px white;
+    box-shadow: 0 5px 10px 0 rgba(0,0,0,0.2);
+    position: absolute;
+    top: 30px;
+    right: 10px;
+}
+
+.removed {
+    display: none;
+}
+
+#close {
+    cursor: pointer;
+    float:right;
+    margin: 2px;
+}
+#pic {
+    float:left;
+    margin: 2px;
+    width: 16px;
+}
+.navbar {
+    cursor: move;
+    background-color: rgb(247, 245, 245);
+    height: 24px;
+}

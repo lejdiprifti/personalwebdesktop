@@ -1,0 +1,158 @@
+#board {
+    position: absolute;
+    border: 1px solid cadetblue;
+    background-color: white;
+    width: 805px;
+    height: 560px;
+}
+
+#close {
+    cursor: pointer;
+    float:right;
+    margin: 2px;
+}
+#pic {
+    float:left;
+    margin: 2px;
+    width: 16px;
+}
+.navbar {
+    cursor: move;
+    background-color: rgb(247, 245, 245);
+    height: 24px;
+}
+.removed {
+    display: none;
+}
+#settings {
+    height: 20px;
+    background-color: rgb(241, 241, 241);
+    text-align: center;
+}
+
+#settings:hover {
+    cursor: pointer;
+    background-color: rgb(226, 223, 223);
+}
+#tools {
+    float:left;
+    width: 50px;
+    margin-right: 10px;
+}
+
+#pink {
+    background-color: pink;
+}
+
+#pink:hover {
+    background-color: rgb(248, 168, 181);
+}
+
+#red {
+    background-color: red;
+}
+
+#red:hover {
+    background-color: rgb(240, 21, 21);
+}
+
+#black {
+    background-color: #444;
+}
+
+#black:hover {
+    background-color: rgb(34, 32, 32);
+}
+
+#yellow {
+    background-color: yellow;
+}
+
+#yellow:hover {
+    background-color: rgb(240, 240, 22);
+}
+
+#blue {
+    background-color: blue;
+}
+#blue:hover {
+    background-color: rgb(34, 34, 216);
+}
+#green {
+    background-color: green;
+}
+
+#green:hover {
+    background-color: rgb(7, 102, 7);
+}
+
+#cyan {
+    background-color: cyan;
+}
+
+#cyan:hover {
+    background-color: rgb(31, 185, 185);
+}
+
+#purple {
+    background-color: purple;
+}
+
+#purple:hover {
+    background-color: rgb(87, 13, 87);
+}
+
+.colour {
+    cursor: pointer;
+    float: left;
+    width: 60px;
+    height: 50px;
+}
+
+#bucket {
+    width: 55px;
+}
+
+#bucketDiv:hover {
+    background-color: rgb(223, 222, 191);
+}
+#eraserDiv {
+    margin-top: 10px;
+}
+#eraser {
+    padding: 10px;
+}
+
+#eraser:hover {
+    -webkit-animation:spin 4s linear infinite;
+    -moz-animation:spin 4s linear infinite;
+    animation:spin 4s linear infinite;
+}
+
+@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
+
+#eraserDiv:hover {
+    background-color: rgb(223, 222, 191);
+}
+
+#eraser {
+    padding-right: 2px;
+    padding-top: 2px;
+}
+
+#canvasDrawing { 
+    position: absolute;
+    width: 745px;
+    height: 515px;
+}
+
+#changeSettings {
+    cursor: pointer;
+}
+.paintSettings {
+    position: absolute;
+    margin-top: 200px;
+    margin-left: 200px;
+}
