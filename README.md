@@ -1,8 +1,4 @@
-## Examination assignment 3
-This is the assignment repo for the second assignment in the course. 
-
-## Installation
-Make sure node.js and npm is installed on your system.
+This is a single page application developed in Vanilla Javascript.Here you will find a small web desktop with 4 apps. You can chat with a server owned by Linnaeus University. You can play memory game and paint. You can take pictures with the camera app. 
 
 1. `npm install`
 2. `npm start`
